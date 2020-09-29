@@ -37,7 +37,8 @@ def principal_stresses(sig: Matrix, symbol, precicion=100, dtype=None):
     sig_pr = [s.n(precicion).round(24) for s in sig_pr]
     
     # Sort by magnitude, in decesning order
-    sig_pr = sorted(sig_pr, key=lambda x: abs(x), reverse=True)
+    # sig_pr = sorted(sig_pr, key=lambda x: abs(x), reverse=True)
+    sig_pr = sorted(sig_pr, reverse=True)
     if dtype is not None:
         if dtype is Matrix:
             sig_pr = Matrix(sig_pr)
