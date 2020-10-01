@@ -11,7 +11,8 @@ __all__ = [
     'check_invariants',
     'rotation_matrix',
     'matrix_round',
-    'save_latex'
+    'save_latex',
+    'ref'
 ]
 
 
@@ -26,8 +27,9 @@ def show(expr, prefix=None, postfix=None):
     return None
 
 
-def principal_stresses(sig: Matrix, symbol, precicion=100, dtype=None):    
+def principal_stresses(sig: Matrix, precicion=100, dtype=None):
     # Calculate the characteristic polynomial.
+    symbol = symbols('__lambda__')
     A = sig - symbol*eye(*sig.shape)
     p = Eq(A.det(), 0)
     
@@ -51,7 +53,7 @@ def invariants(sig: Matrix, dtype: callable = Float):
     q = [float()] * 3
     q[0] = sig.trace()
     q[1] = sig[[1, 2], [1, 2]].det()
-    q[1] += sig[[0, 1], [0, 1]].det() 
+    q[1] += sig[[0, 1], [0, 1]].det()
     q[1] += sig[[0, 2], [0, 2]].det()
     q[2] = sig.det()
     if dtype is not None:
@@ -62,12 +64,19 @@ def invariants(sig: Matrix, dtype: callable = Float):
     return q
 
 
-def octahedral_shear(SS: Matrix, dtype=Float):
+def octahedral_shear(sig: np.ndarray, principal=False):        
+    if not principal:
+        sig_pr = principal_stresses(sig)
+    else:
+        if 1 in sig.shape:
+            sig_pr = np.asarray(sig).flatten()
+    
     result = (sig_pr[0] - sig_pr[1])**2
     result += (sig_pr[1] - sig_pr[2])**2
     result += (sig_pr[2] - sig_pr[0])**2
     result = sqrt(result) / 3
-    return dtype(result)
+    
+    return float(result)
 
 
 def check_invariants(Q, SS, symbol):
@@ -97,3 +106,23 @@ def matrix_round(mat: Matrix, precision=0):
 def save_latex(expr, filename):
     with open(filename, 'w') as fp:
         fp.write(latex(expr))
+
+
+def ref(S):
+    Sc = S.copy()
+    Sc = matrix_round(Sc.n(100), 32)
+    show(Sc.n(6), prefix=r"A=")
+
+    Sc[0, :] /= Sc[0, 0]
+    Sc[1, :] -= Sc[1, 0] * Sc[0, :]
+    Sc[2, :] -= Sc[2, 0] * Sc[0, :]
+    show(Sc.n(6))
+
+    Sc[1, :] = Sc[1, :] / Sc[1, 1]
+    Sc[2, :] -= Sc[2, 1] * Sc[1, :]
+    show(Sc.n(6))
+
+    Sc[2, :] = Sc[2, :] / Sc[2, 2]
+    show(Sc.n(6))
+    
+    return Sc
