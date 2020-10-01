@@ -12,9 +12,10 @@ __all__ = [
     'rotation_matrix',
     'matrix_round',
     'save_latex',
-    'ref'
+    'ref',
+    'stress_field',
+    'to_numpy'
 ]
-
 
 
 def show(expr, prefix=None, postfix=None):
@@ -49,18 +50,18 @@ def principal_stresses(sig: Matrix, precicion=100, dtype=None):
     return sig_pr
 
 
-def invariants(sig: Matrix, dtype: callable = Float):
-    q = [float()] * 3
+def invariants(sig: Matrix, dtype: callable = Matrix):
+    q = zeros(3, 1)
     q[0] = sig.trace()
     q[1] = sig[[1, 2], [1, 2]].det()
     q[1] += sig[[0, 1], [0, 1]].det()
     q[1] += sig[[0, 2], [0, 2]].det()
     q[2] = sig.det()
-    if dtype is not None:
-        if dtype is Matrix:
-            q = Matrix(q)
-        else:
-            q = [dtype(qi) for qi in q]
+    # if dtype is not None:
+    #     if dtype is Matrix:
+    #         q = Matrix(q)
+    #     else:
+    #         q = [dtype(qi) for qi in q]
     return q
 
 
@@ -108,21 +109,97 @@ def save_latex(expr, filename):
         fp.write(latex(expr))
 
 
-def ref(S):
+def ref(S, display=True):
     Sc = S.copy()
     Sc = matrix_round(Sc.n(100), 32)
-    show(Sc.n(6), prefix=r"A=")
+    if display:
+        show(Sc.n(6), prefix=r"A=")
 
     Sc[0, :] /= Sc[0, 0]
     Sc[1, :] -= Sc[1, 0] * Sc[0, :]
     Sc[2, :] -= Sc[2, 0] * Sc[0, :]
-    show(Sc.n(6))
+    # Sc = Sc.n(chop=True)
+    
+    if display:
+        show(Sc.n(6))
 
     Sc[1, :] = Sc[1, :] / Sc[1, 1]
     Sc[2, :] -= Sc[2, 1] * Sc[1, :]
-    show(Sc.n(6))
+    # Sc = Sc.n(chop=True)
+    
+    if display:
+        show(Sc.n(6))
 
     Sc[2, :] = Sc[2, :] / Sc[2, 2]
-    show(Sc.n(6))
+    Sc = Sc.n(chop=True)
+    
+    if display:
+        show(Sc.n(6))
     
     return Sc
+
+
+def stress_field(x: Matrix, v: list):
+    """
+    Calculate the stress field, and determine admissibility.
+    
+    Arguments
+    ---------
+    x : sympy.matrices.dense.MutableDenseMatrix
+        State of stress in matrix form.
+    v : sympy.core.symbol.Symbol
+        list of sympy variables
+    
+    Returns
+    -------
+    sf : sympy.matrices.dense.MutableDenseMatrix
+        Stress corresponding to `x` and `v`.
+    admissible : bool
+        Return True if the state of stress is admissable; False otherwise.
+    """
+    
+    xc = x.copy()
+    n, m = xc.shape
+    
+    assert len(v) == m, \
+        "Number of variables must match the number of columns of x."
+    
+    # Compute the derivatives.
+    for i in range(n):
+        for j in range(m):
+            xc[i, j] = xc[i, j].diff(v[j])
+            
+    # Sum the rows and test for equilibrium.
+    all_zero = 0.
+    for i in range(n):
+        all_zero += sum(xc[i, :])
+    
+    if not all_zero:
+        return xc, True
+    
+    return xc, False
+
+
+def to_numpy(x: Matrix, diag=False, dtype='float64'):
+    """
+    Covert a sympy matrix to a numpy array.
+    
+    Arguments
+    ---------
+    x : Matrix (N x M) | (N x 1) | (1 X M) | (1,)
+        Sympy matrix to convert.
+    diag : bool, optional
+        If True, return a diagonal matrix consisting of the elements of x.
+        To use this option, x must be a row or column vector, or a 1D array.
+        Default is False.
+    dtype : {str, np.dtype}, optional
+        Convert x to a numpy data type. Default is float64.
+    
+    Returns
+    -------
+    (N x M) ndarray.
+    If diag=True: (max(x.shape) x max(x.shape)) ndarray
+    """
+    if (1 in x.shape or len(x.shape) == 1) and diag:
+        return np.diagflat(np.asarray(x, dtype=dtype))
+    return np.asarray(x, dtype=dtype)
