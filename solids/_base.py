@@ -8,6 +8,7 @@ __all__ = [
     'principal_stresses',
     'invariants',
     'octahedral_shear',
+    'octahedral_normal',
     'check_invariants',
     'rotation_matrix',
     'matrix_round',
@@ -28,56 +29,171 @@ def show(expr, prefix=None, postfix=None):
     return None
 
 
-def principal_stresses(sig: Matrix, precicion=100, dtype=None):
-    # Calculate the characteristic polynomial.
-    symbol = symbols('__lambda__')
-    A = sig - symbol*eye(*sig.shape)
-    p = Eq(A.det(), 0)
+def principal_stresses(
+        sig: Matrix, dtype='numpy', display: bool = True) -> Matrix:
+    """
+    Calculate the principal stress and principal axes of the stress matrix
+    `sig`.
+
+    Parameters
+    ----------
+    sig : Matrix
+        Stress matrix.
+    dtype : str, {'numpy', 'matrix'}, optional
+        Return type of the solution. Use 'numpy' to return np.ndarray. Use
+        'matrix' to return sympy.Matrix. The default is 'numpy'.
+    display : bool, optional
+        Display the results automatically.
+
+    Returns
+    -------
+    Tuple[Matrix, Matrix]
+        First element is the sorted principal stresses.
+        The second element is the eigenvectors of sig in the form of a Matrix.
+
+    Raises
+    ------
+    ValueError
+        If dtype is not one of {'numpy', 'matrix'}.
+        
+    """
+    if dtype == 'numpy':
+        # Calculate the eigenvalues and eigenvectors
+        sig = np.asarray(sig, dtype='float64')
+        d, v = np.linalg.eig(sig)
+        
+        # Sort eigenvalues and eigenvectors
+        sort_idx = sorted(range(d.size), key=lambda i: d[i], reverse=True)
+        sorted_d = np.zeros_like(d)
+        sorted_v = np.zeros_like(v)
+        for i in range(d.size):
+            sorted_d[i] = d[sort_idx[i]]
+            sorted_v[:, i] = v[:, sort_idx[i]]
+        
+        ret = (sorted_d, sorted_v)
     
-    # Calculate the roots (i.e. the principal stresses).
-    # Also, correct for numerical errors.
-    sig_pr = solve(p, symbol)
-    sig_pr = [s.n(precicion).round(24) for s in sig_pr]
+    elif dtype == 'sympy':
+        # Calculate the eigevnvalues and eigenvectors.
+        sig = Matrix(sig).n()
+        pr = Matrix(sig).eigenvects(multiple=True)
+
+        # Sort the eigenvalues and eigenvectors.
+        pr = sorted(pr, key=lambda x: x[0], reverse=True)
+        pr_sig = zeros(1, 3)
+        pr_ax = zeros(3)
+
+        for i in range(len(pr)):
+            pr_sig[0, i] = pr[i][0]
+            pr_ax[:, i] = pr[i][2]
+            
+        # Round for numerical precision.
+        pr_sig = pr_sig.n(chop=True)
+        pr_ax = pr_ax.n(chop=True)
+        
+        ret = (pr_sig, pr_ax)
     
-    # Sort by magnitude, in decesning order
-    # sig_pr = sorted(sig_pr, key=lambda x: abs(x), reverse=True)
-    sig_pr = sorted(sig_pr, reverse=True)
-    if dtype is not None:
-        if dtype is Matrix:
-            sig_pr = Matrix(sig_pr)
-        else:
-            sig_pr = [dtype(ps) for ps in sig_pr]
-    return sig_pr
+    else:
+        raise ValueError(f'Invalid input for dtype: {dtype}')
+    
+    if display:
+        if dtype == 'sympy':
+            show(ret[0], prefix=r"\sigma^{(i)}=")
+            show(ret[1], prefix=r"\hat{n}_{i}^{*}=")
+        
+        elif dtype == 'numpy':
+            print('pr_sig =\n', ret[0])
+            print('pr_ax =\n', ret[1])
+        
+    return ret
 
 
-def invariants(sig: Matrix, dtype: callable = Matrix):
+def invariants(sig: Matrix) -> Matrix:
+    """
+    Compute the invariants if sig.
+
+    Parameters
+    ----------
+    sig : Matrix
+        Matrix whose invariants will be computed.
+
+    Returns
+    -------
+    Matrix
+        The invariants of sig.
+    """
     q = zeros(3, 1)
     q[0] = sig.trace()
     q[1] = sig[[1, 2], [1, 2]].det()
     q[1] += sig[[0, 1], [0, 1]].det()
     q[1] += sig[[0, 2], [0, 2]].det()
     q[2] = sig.det()
-    # if dtype is not None:
-    #     if dtype is Matrix:
-    #         q = Matrix(q)
-    #     else:
-    #         q = [dtype(qi) for qi in q]
+    
     return q
 
 
-def octahedral_shear(sig: np.ndarray, principal=False):        
+def octahedral_shear(
+        sig: np.ndarray, principal: bool = False) -> FloatingPointError:
+    """
+    Compute the shear component on an octahedral plane.
+
+    Parameters
+    ----------
+    sig : (3, 3) np.ndarray
+        Stress matrix.
+    principal : bool, optional
+        If True, allows the user to pass a 1D array of principal stresses to
+        sig. Default if False.
+
+    Returns
+    -------
+    bool
+        The shear component of stress on an octehedral plane.
+    
+    """
+    if not isinstance(sig, np.ndarray):
+        sig = np.asarray(sig, dtype='float64')
+    
     if not principal:
-        sig_pr = principal_stresses(sig)
+        pr_sig, _ = principal_stresses(sig, dtype='numpy', display=False)
     else:
         if 1 in sig.shape:
-            sig_pr = np.asarray(sig).flatten()
+            pr_sig = np.asarray(sig).flatten()
     
-    result = (sig_pr[0] - sig_pr[1])**2
-    result += (sig_pr[1] - sig_pr[2])**2
-    result += (sig_pr[2] - sig_pr[0])**2
+    result = (pr_sig[0] - pr_sig[1])**2
+    result += (pr_sig[1] - pr_sig[2])**2
+    result += (pr_sig[2] - pr_sig[0])**2
     result = sqrt(result) / 3
     
     return float(result)
+
+
+def octahedral_normal(sig: np.ndarray, principal=False) -> float:
+    """
+    Compute the normal component of stress on an octahedral plane.
+
+    Parameters
+    ----------
+    sig : (3, 3) np.ndarray
+        Stress matrix.
+    principal : bool, optional
+        If True, allows the user to pass a 1D array of principal stresses to
+        sig. Default if False.
+
+    Returns
+    -------
+    float
+        The normal component of stress on an octahedral plane.
+    
+    """
+    if not isinstance(sig, np.ndarray):
+        sig = np.asarray(sig, dtype='float64')
+    
+    if not principal:
+        pr_sig, _ = principal_stresses(sig, dtype='numpy', display=False)
+    else:
+        pr_sig = np.asarray(sig).flatten()
+            
+    return pr_sig.mean()
 
 
 def check_invariants(Q, SS, symbol):
@@ -109,9 +225,23 @@ def save_latex(expr, filename):
         fp.write(latex(expr))
 
 
-def ref(S, display=True):
-    Sc = S.copy()
-    Sc = matrix_round(Sc.n(100), 32)
+def ref(S: Matrix, display: bool = True) -> Matrix:
+    """
+    Tranform the matrix S to row echelon form.
+
+    Parameters
+    ----------
+    S : Matrix
+        Matrix to transform.
+    display : bool, optional
+        Display the results in Jupyter notebook. The default True.
+
+    Returns
+    -------
+    Matrix
+        [description]
+    """
+    Sc = S.copy().n(chop=True)
     if display:
         show(Sc.n(6), prefix=r"A=")
 
