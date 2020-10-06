@@ -4,6 +4,7 @@ from sympy import *
 
 
 __all__ = [
+    'StressState',
     'show',
     'principal_stresses',
     'invariants',
@@ -15,7 +16,9 @@ __all__ = [
     'save_latex',
     'ref',
     'stress_field',
-    'to_numpy'
+    'to_numpy',
+    'char_poly',
+    'symmetric'
 ]
 
 
@@ -54,7 +57,7 @@ def principal_stresses(
     Raises
     ------
     ValueError
-        If dtype is not one of {'numpy', 'matrix'}.
+        If dtype is not one of {'numpy', 'sympy'}.
         
     """
     if dtype == 'numpy':
@@ -78,7 +81,8 @@ def principal_stresses(
         pr = Matrix(sig).eigenvects(multiple=True)
 
         # Sort the eigenvalues and eigenvectors.
-        pr = sorted(pr, key=lambda x: x[0], reverse=True)
+        if not sig.is_symbolic():
+            pr = sorted(pr, key=lambda x: x[0], reverse=True)
         pr_sig = zeros(1, 3)
         pr_ax = zeros(3)
 
@@ -121,18 +125,31 @@ def invariants(sig: Matrix) -> Matrix:
     Matrix
         The invariants of sig.
     """
-    q = zeros(3, 1)
-    q[0] = sig.trace()
-    q[1] = sig[[1, 2], [1, 2]].det()
-    q[1] += sig[[0, 1], [0, 1]].det()
-    q[1] += sig[[0, 2], [0, 2]].det()
-    q[2] = sig.det()
+    if isinstance(sig, Matrix):
+        q = zeros(3, 1)
+        q[0] = sig.trace()
+        q[1] = sig[[1, 2], [1, 2]].det()
+        q[1] += sig[[0, 1], [0, 1]].det()
+        q[1] += sig[[0, 2], [0, 2]].det()
+        q[2] = sig.det()
+    
+    elif isinstance(sig, np.ndarray):
+        temp = sig.copy()
+        M = []
+        for i in range(3):
+            M.append(np.delete(np.delete(temp, i, axis=0), i, axis=1))
+        q = np.zeros((3,))
+        q[0] = sig.trace()
+        q[1] = np.linalg.det(M[0])
+        q[1] += np.linalg.det(M[1])
+        q[1] += np.linalg.det(M[2])
+        q[2] = np.linalg.det(sig)
     
     return q
 
 
 def octahedral_shear(
-        sig: np.ndarray, principal: bool = False) -> FloatingPointError:
+        sig: np.ndarray, principal: bool = False) -> float:
     """
     Compute the shear component on an octahedral plane.
 
@@ -146,7 +163,7 @@ def octahedral_shear(
 
     Returns
     -------
-    bool
+    float
         The shear component of stress on an octehedral plane.
     
     """
@@ -333,3 +350,176 @@ def to_numpy(x: Matrix, diag=False, dtype='float64'):
     if (1 in x.shape or len(x.shape) == 1) and diag:
         return np.diagflat(np.asarray(x, dtype=dtype))
     return np.asarray(x, dtype=dtype)
+
+
+def char_poly(sig: Matrix) -> Poly:
+    
+    _lambda = symbols('lambda')
+    size = min(sig.shape)
+    A = sig - diag(*[_lambda]*size)
+    d = Eq(A.det(), 0)
+    return d, _lambda
+    
+
+def symmetric(sig: list) -> Matrix:
+    
+    t = zeros(3, 3)
+    
+    t[0, 0] = sig[0]
+    t[0, 1] = sig[1]
+    t[0, 2] = sig[2]
+    t[1, 0] = t[0, 1]
+    t[1, 1] = sig[3]
+    t[1, 2] = sig[4]
+    t[2, 0] = t[0, 2]
+    t[2, 1] = t[1, 2]
+    t[2, 2] = sig[5]
+    
+    return t
+
+
+def max_shear(sigma: np.ndarray, principal=False) -> float:
+    if not isinstance(sigma, np.ndarray):
+        sigma = np.asarray(sigma, dtype='float64')
+        
+    if not principal:
+        pr_stress, _ = principal_stresses(sigma, dtype='numpy', display=False)
+    else:
+        pr_stress = sigma
+        
+    return 0.5 * (pr_stress.max() - pr_stress.min())
+
+
+class StressState:
+    
+    def __init__(self, sigma, dtype):
+        self._sigma = sigma
+        self._sigma_sympy = Matrix(sigma)
+        self._dtype = dtype
+        self._convert()
+            
+        self._pr_stress = None
+        self._pr_ax = None
+        self._invariants = None
+        self._octahedral_shear = None
+        self._octahedral_normal = None
+        self._max_shear = None
+        self._char_poly = None
+        
+    def full_report(self):
+        self._get_principal()
+        _ = self.invariants
+        _ = self.octahedral_normal
+        _ = self.octahedral_shear
+        _ = self.max_shear
+        _ = self._char_poly
+        
+        if self._dtype == 'numpy':
+            self._report_numpy()
+        elif self._dtype == 'sympy':
+            self._report_sympy()
+        return
+        
+    @property
+    def principal_stresses(self):
+        if self._pr_stress is None:
+            self._get_principal()
+        return self._pr_stress
+    
+    @property
+    def principal_axes(self):
+        if self._pr_ax is None:
+            self._get_principal()
+        return self._pr_ax
+    
+    @property
+    def invariants(self):
+        if self._invariants is None:
+            self._invariants = invariants(self._sigma)
+        return self._invariants
+    
+    @property
+    def octahedral_shear(self):
+        if self._octahedral_shear is None:
+            self._octahedral_shear = octahedral_shear(
+                self._sigma, principal=False)
+        
+        return self._octahedral_shear
+    
+    @property
+    def octahedral_normal(self):
+        if self._octahedral_normal is None:
+            self._octahedral_normal = octahedral_normal(
+                self._sigma, principal=False)
+        
+        return self._octahedral_normal
+    
+    @property
+    def max_shear(self):
+        if self._max_shear is None:
+            if self._pr_stress is None:
+                self._pr_stress, _ = principal_stresses(
+                    self._sigma, dtype='numpy', display=False)
+            
+            self._max_shear = max_shear(self._pr_stress, principal=True)
+        
+        return self._max_shear
+    
+    @property
+    def char_poly(self):
+        if self._char_poly is None:
+            self._char_poly = char_poly(self._sigma_sympy)
+        
+        return self._char_poly
+    
+    def _report_numpy(self):
+        self._custom_print('State of Stress', self._sigma)
+        self._custom_print('Principal Stresses', self._pr_stress)
+        self._custom_print('Principal Axes', self._pr_ax)
+        self._custom_print('Octahedral Normal Stress', self._octahedral_normal)
+        self._custom_print('Octahedral Shear Stress', self._octahedral_shear)
+        self._custom_print('Max Shear Stress', self._max_shear)
+        self._custom_print('Invariants', self._invariants)
+        self._custom_print('Characteristic Polynomial', self._char_poly[0].lhs)
+        return
+    
+    @staticmethod
+    def _custom_print(title, value, w=79):
+        print('-' * w)
+        print(title)
+        print('-' * w)
+        print(value)
+        print('\n')
+        return
+    
+    def _report_sympy(self):
+        show(self._sigma, r"\text{State of Stress}\\\sigma=", r"\\")
+        show(self._pr_stress, r"\text{Principal Stresses}\\\sigma^{(i)}=", r"\\")
+        show(self._pr_ax, r"\text{Principal Axes}\\\hat{n}^{(i)}=", r"\\")
+        show(self._octahedral_normal, r"\text{Octahedral Normal Stress}\\\sigma_{nn}^{oct}=", r"\\")
+        show(self._octahedral_shear, r"\text{Octahedral Shear Stress}\\\sigma_{ns}^{oct}=", r"\\")
+        show(self._max_shear, r"\text{Max Shear Stress}\\\sigma_{oct}^{max}=", r"\\")
+        show(self._invariants, r"\text{Invariants}\\Q_i=", r"\\")
+        show(self._char_poly[0].lhs, r"\text{Characteristic Polynomial}\\p=", r"\\")
+    
+    def _get_principal(self):
+        self._pr_stress, self._pr_ax = principal_stresses(
+            self._sigma, display=False, dtype=self._dtype)
+    
+    def _convert(self):
+        if self._dtype == 'numpy':
+            self._sigma = np.asarray(self._sigma, dtype='float64')
+
+        elif self._dtype == 'sympy':
+            self._pr_stress = Matrix(self._sigma)
+    
+    def __str__(self):
+        if self._dtype == 'numpy':
+            return str(self._sigma)
+        if self._dtype == 'sympy':
+            show(self._sigma)
+            return ''
+    
+    def __repr__(self):
+        return self.__str__()
+    
