@@ -1,6 +1,8 @@
 from IPython.display import Math, display
 import numpy as np
 from sympy import *
+import sympy as sp
+from typing import List
 
 
 __all__ = [
@@ -13,12 +15,16 @@ __all__ = [
     'check_invariants',
     'rotation_matrix',
     'matrix_round',
+    'max_shear',
     'save_latex',
     'ref',
     'stress_field',
     'to_numpy',
     'char_poly',
-    'symmetric'
+    'symmetric',
+    'div',
+    'strain_rotation_tensor',
+    'mean_normal_deviator'
 ]
 
 
@@ -338,7 +344,8 @@ def to_numpy(x: Matrix, diag=False, dtype='float64'):
     diag : bool, optional
         If True, return a diagonal matrix consisting of the elements of x.
         To use this option, x must be a row or column vector, or a 1D array.
-        Default is False.
+        Def
+        ault is False.
     dtype : {str, np.dtype}, optional
         Convert x to a numpy data type. Default is float64.
     
@@ -409,10 +416,13 @@ class StressState:
     def full_report(self):
         self._get_principal()
         _ = self.invariants
-        _ = self.octahedral_normal
-        _ = self.octahedral_shear
-        _ = self.max_shear
-        _ = self._char_poly
+        _ = self.char_poly
+        
+        if self._dtype == 'sympy':
+            if not self._sigma.is_symbolic():
+                _ = self.octahedral_normal
+                _ = self.octahedral_shear
+                _ = self.max_shear
         
         if self._dtype == 'numpy':
             self._report_numpy()
@@ -476,9 +486,11 @@ class StressState:
         self._custom_print('State of Stress', self._sigma)
         self._custom_print('Principal Stresses', self._pr_stress)
         self._custom_print('Principal Axes', self._pr_ax)
-        self._custom_print('Octahedral Normal Stress', self._octahedral_normal)
-        self._custom_print('Octahedral Shear Stress', self._octahedral_shear)
-        self._custom_print('Max Shear Stress', self._max_shear)
+        if self._dtype == 'sympy':
+            if not self._sigma.is_symbolic():
+                self._custom_print('Octahedral Normal Stress', self._octahedral_normal)
+                self._custom_print('Octahedral Shear Stress', self._octahedral_shear)
+                self._custom_print('Max Shear Stress', self._max_shear)
         self._custom_print('Invariants', self._invariants)
         self._custom_print('Characteristic Polynomial', self._char_poly[0].lhs)
         return
@@ -496,9 +508,11 @@ class StressState:
         show(self._sigma, r"\text{State of Stress}\\\sigma=", r"\\")
         show(self._pr_stress, r"\text{Principal Stresses}\\\sigma^{(i)}=", r"\\")
         show(self._pr_ax, r"\text{Principal Axes}\\\hat{n}^{(i)}=", r"\\")
-        show(self._octahedral_normal, r"\text{Octahedral Normal Stress}\\\sigma_{nn}^{oct}=", r"\\")
-        show(self._octahedral_shear, r"\text{Octahedral Shear Stress}\\\sigma_{ns}^{oct}=", r"\\")
-        show(self._max_shear, r"\text{Max Shear Stress}\\\sigma_{oct}^{max}=", r"\\")
+        if self._dtype == 'sympy':
+            if not self._sigma.is_symbolic():
+                show(self._octahedral_normal, r"\text{Octahedral Normal Stress}\\\sigma_{nn}^{oct}=", r"\\")
+                show(self._octahedral_shear, r"\text{Octahedral Shear Stress}\\\sigma_{ns}^{oct}=", r"\\")
+                show(self._max_shear, r"\text{Max Shear Stress}\\\sigma_{oct}^{max}=", r"\\")
         show(self._invariants, r"\text{Invariants}\\Q_i=", r"\\")
         show(self._char_poly[0].lhs, r"\text{Characteristic Polynomial}\\p=", r"\\")
     
@@ -522,4 +536,41 @@ class StressState:
     
     def __repr__(self):
         return self.__str__()
+
+
+def div(u: Matrix, v: List[Symbol]) -> Matrix:
+    Ju = zeros(3, 3)
+
+    for i in range(3):
+        for j in range(3):
+            Ju[i, j] = u[i].diff(v[j])
+
+    return Ju
+
+
+def strain_rotation_tensor(u: {Matrix, list}, v: List[Symbol]):
+    "0.5 * (u_i,j + u_j,i)"
+    if isinstance(u, Matrix):
+        eps = zeros(3, 3)
+        omg = zeros(3, 3)
+    elif isinstance(u, np.ndarray):
+        eps = np.zeros(3, 3)
+        omg = np.zeros(3, 3)
+    else:
+        raise ValueError('u  must be of type {Matrix, list}.')
+
+    Ju = div(u, v)
     
+    for i in range(3):
+        for j in range(3):
+            eps[i, j] = (Ju[i, j] + Ju[j, i]) / 2
+            omg[i, j] = (Ju[i, j] - Ju[j, i]) / 2
+            
+    return eps, omg
+
+
+def mean_normal_deviator(x: Matrix):
+    x0 = sp.trace(x) / 3
+    xm = sp.diag(*[x0]*3)
+    xd = x - xm
+    return xm, xd
