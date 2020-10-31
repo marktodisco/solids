@@ -2,7 +2,7 @@ from IPython.display import Math, display
 import numpy as np
 from sympy import *
 import sympy as sp
-from typing import List
+from typing import List, Tuple
 from collections import deque
 
 
@@ -15,9 +15,9 @@ __all__ = [
     'to_numpy',
     'char_poly',
     'symmetric',
-    'gradient',
-    'mean_normal_deviator',
-    'cross'
+    'jacobian',
+    'cross',
+    'mean_deviator'
 ]
 
 
@@ -183,7 +183,7 @@ def symmetric(sig: list) -> Matrix:
     return t
 
 
-def gradient(u: list, v: List[sp.Symbol]) -> sp.Matrix:
+def jacobian(u: list, v: List[sp.Symbol]) -> sp.Matrix:
     
     n = len(u)
     m = len(v)
@@ -196,13 +196,6 @@ def gradient(u: list, v: List[sp.Symbol]) -> sp.Matrix:
             Ju[i, j] = u[i].diff(v[j])
 
     return Ju
-
-
-def mean_normal_deviator(x: Matrix):
-    x0 = sp.trace(x) / 3
-    xm = sp.diag(*[x0]*3)
-    xd = x - xm
-    return xm, xd
 
 
 def _even_odd_test(i, j, k, test='even'):
@@ -240,4 +233,26 @@ def cross(a, b):
     return c
 
 
-
+def mean_deviator(eps: sp.Matrix) -> Tuple:
+    sympy = True if isinstance(eps, sp.Matrix) else False
+    numpy = True if isinstance(eps, np.ndarray) else False
+    if not (sympy ^ numpy):
+        raise ValueError('`eps` must be a sympy Matrix or Numpy array.')
+    
+    def eval_sympy():
+        e0 = eps.trace() / 3
+        mean_strain = sp.diag(*[e0]*3)
+        devaiatoric_strain = eps - mean_strain
+        return mean_strain, devaiatoric_strain
+    
+    def eval_numpy():
+        e0 = np.trace(eps) / 3
+        mean_strain = np.diag([e0]*3)
+        devaiatoric_strain = eps - mean_strain
+        return mean_strain, devaiatoric_strain
+    
+    if numpy:
+        return eval_numpy()
+    return eval_sympy()
+    
+    
