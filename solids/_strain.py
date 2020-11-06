@@ -1,26 +1,22 @@
-import numpy as np
-import sympy as sp
-from typing import List, Tuple
-from collections import deque
-from sympy.logic.boolalg import BooleanTrue, BooleanFalse
-from ._base import jacobian, show
-from ._stress import (StressState, octahedral_shear, octahedral_normal,
-                      principal_stresses, char_poly, max_shear)
+from builtins import ValueError
+from typing import Tuple
 
+import sympy as sp
+from sympy.logic.boolalg import BooleanTrue, BooleanFalse
+
+from solids._base import jacobian, show
+from solids._stress import StressState, octahedral_shear, octahedral_normal, principal_stresses, max_shear
 
 __all__ = [
     'strain',
-    'st_venant_compatability',
+    'st_venant_compatibility',
     'StrainState'
 ]
 
 
-def strain(u: list = None,
-           v: list = None,
-           H: sp.Matrix = None
-           ) -> Tuple[sp.Matrix, sp.Matrix, sp.Matrix, sp.Matrix]:
+def strain(u: list = None, v: list = None, H: sp.Matrix = None) -> Tuple[sp.Matrix, sp.Matrix, sp.Matrix, sp.Matrix]:
     """
-    Calculate infitesimal strain, infitesimal rotation, Lagrangian strain, and
+    Calculate infinitesimal strain, infinitesimal rotation, Lagrangian strain, and
     Eulerian strain.
 
     Parameters
@@ -30,12 +26,12 @@ def strain(u: list = None,
     v : list, optional
         Symbols to differentiate wrt, by default None
     H : sp.Matrix, optional
-        Derivative matrix forof the strain field equations, by default None
+        Derivative matrix of the strain field equations, by default None
 
     Returns
     -------
     Tuple[sp.Matrix, sp.Matrix, sp.Matrix, sp.Matrix]
-        Infitesimal strain, infitesimal rotation, Lagrangian strain, and
+        infinitesimal strain, infinitesimal rotation, Lagrangian strain, and
         Eulerian strain. (epsilon, omega, E, e)
 
     Raises
@@ -45,16 +41,10 @@ def strain(u: list = None,
     ValueError
         If `u` is specified, `v` must also be specified.
     """
-    if u is None and H is None:
-        raise ValueError("`u` or `H` must be specified.")
-
-    if u is not None and v is None:
-        raise ValueError("Must specify `v` if `u` is provided.")
-        
-    do_diff = False if H is not None else True
-    H = jacobian(u, v) if do_diff else H
-    
-    if do_diff:
+    if H is not None:
+        if u is None or v is None:
+            raise ValueError("If `H` is unspecified, `u` and `v` must be specified.")
+    else:
         H = jacobian(u, v)
     
     n, m = H.shape
@@ -75,60 +65,60 @@ def strain(u: list = None,
     return epsilon, omega, E, e
 
 
-def st_venant_compatability(symbols: list, strain: dict, full=False) -> list:
+def st_venant_compatibility(symbols: list, strain_field: dict, full=False) -> list:
     """
-    Compute the St. Venant compatability equations for a state of strain.
+    Compute the St. Venant compatibility equations for a state of strain_field.
 
     Parameters
     ----------
     symbols : list
-        Sympy symbols by which `strain` are defined.
-    strain : dict
-        Mapping of strain to state-equations.
+        Sympy symbols by which `strain_field` are defined.
+    strain_field : dict
+        Mapping of strain_field to state-equations.
         Keys must be {11, 22, 33, 12, 23, 13}.
-        Diaglonal symmetry is assumed.
+        Diagonal symmetry is assumed.
         i.e. (12 = 21), (23 = 32), and (13 = 31).
     full : bool, optional
-        If True, shows latex representation of the compatabillity equations.
+        If True, shows latex representation of the compatibility equations.
         The default is False.
 
     Returns
     -------
     list
-        Simplified compatability equations. Use Sympy's `solve` to calculate
+        Simplified compatibility equations. Use Sympy's `solve` to calculate
         the solution to the system of linear system of equations.
     """
     x1, x2, x3 = symbols
-    
-    strain = {k: sp.sympify(v) for (k, v) in strain.items()}
-    
-    e11 = strain[11]
-    e22 = strain[22]
-    e33 = strain[33]
-    
-    e12 = strain[12]
-    e23 = strain[23]
-    e13 = strain[13]
-    
+
+    strain_field = {k: sp.sympify(v) for (k, v) in strain_field.items()}
+
+    e11 = strain_field[11]
+    e22 = strain_field[22]
+    e33 = strain_field[33]
+
+    e12 = strain_field[12]
+    e23 = strain_field[23]
+    e13 = strain_field[13]
+
     e21 = e12.copy()
     e32 = e23.copy()
     e31 = e13.copy()
-    
+
     conds = [
         sp.Eq(e11.diff(x2, 2) + e22.diff(x1, 2), 2*e12.diff(x1).diff(x2)),
         sp.Eq(e22.diff(x3, 2) + e33.diff(x2, 2), 2*e23.diff(x2).diff(x3)),
         sp.Eq(e33.diff(x1, 2) + e11.diff(x3, 2), 2*e31.diff(x3).diff(x1)),
         sp.Eq(e12.diff(x1).diff(x3) + e13.diff(x1).diff(x2) - e23.diff(x1, 2),
               e11.diff(x2).diff(x3)),
-        sp.Eq(e23.diff(x2).diff(x1) + e21.diff(x2).diff(x3) - e31.diff(x2, 2), 
+        sp.Eq(e23.diff(x2).diff(x1) + e21.diff(x2).diff(x3) - e31.diff(x2, 2),
               e22.diff(x3).diff(x1)),
-        sp.Eq(e31.diff(x3).diff(x2) + e32.diff(x3).diff(x1) - e21.diff(x3, 2), 
+        sp.Eq(e31.diff(x3).diff(x2) + e32.diff(x3).diff(x1) - e21.diff(x3, 2),
               e33.diff(x1).diff(x2))
     ]
-    
+
     if full:
         _print_conds(conds)
-    
+
     return conds
 
 
