@@ -1,5 +1,5 @@
 from collections import deque
-from typing import List, Tuple
+from typing import List, Tuple, Union, Any
 
 import numpy as np
 import sympy as sp
@@ -21,8 +21,12 @@ __all__ = [
     'elasticity_matrix',
     'compatibility_matrix',
     'get_missing',
-    'voight_to_matrix',
-    'matrix_to_voight'
+    'lame_constant',
+    'voigt_to_matrix',
+    'matrix_to_voigt',
+    'poissons_ratio',
+    'laplacian',
+    'laplacian_matrix'
 ]
 
 
@@ -339,26 +343,182 @@ def lame_constant(E, nu):
     return nu * E / (1 + nu) / (1 - 2*nu)
 
 
-def voight_to_matrix(voight):
-    matrix = sp.zeros(3, 3)
+def voigt_to_matrix(voight: Union[sp.Matrix, list]) -> sp.Matrix:
+    """
+    Convert a vector in standard Voight notation to a 2D symmetric matrix.
+
+    Parameters
+    ----------
+    voight: (6, 1) sp.matrix
+        1D vector.
+
+    Notes
+    -----
+    https://en.wikipedia.org/wiki/Voigt_notation
+
+    Returns
+    -------
+    (3, 3) sp.matrix
+        2D matrix with 3 dimensions.
+
+    """
+    matrix: sp.Matrix = sp.zeros(3, 3)
+
     matrix[0, 0] = voight[0]
     matrix[1, 1] = voight[1]
     matrix[2, 2] = voight[2]
-    matrix[0, 1] = voight[3]
-    matrix[1, 0] = voight[3]
-    matrix[1, 2] = voight[4]
-    matrix[2, 1] = voight[4]
-    matrix[2, 0] = voight[5]
-    matrix[0, 2] = voight[5]
+
+    matrix[1, 2] = voight[3]
+    matrix[2, 1] = voight[3]
+
+    matrix[0, 2] = voight[4]
+    matrix[2, 0] = voight[4]
+
+    matrix[0, 1] = voight[5]
+    matrix[1, 0] = voight[5]
+
     return matrix
 
 
-def matrix_to_voight(matrix):
+def matrix_to_voigt(matrix: sp.Matrix) -> sp.Matrix:
+    """
+    Convert a 2D symmetric matrix to a vector in standard Voight notation.
+
+    Parameters
+    ----------
+    matrix: (3, 3) sp.matrix
+        2D matrix with 3 dimensions.
+
+    Returns
+    -------
+    (6, 1) sp.matrix
+        1D vector.
+
+    References
+    ----------
+    [1] https://en.wikipedia.org/wiki/Voigt_notation
+
+    """
     voight = sp.zeros(6, 1)
     voight[0] = matrix[0, 0]
     voight[1] = matrix[1, 1]
     voight[2] = matrix[2, 2]
-    voight[3] = matrix[0, 1]
-    voight[4] = matrix[1, 2]
-    voight[5] = matrix[2, 0]
+    voight[3] = matrix[1, 2]
+    voight[4] = matrix[0, 2]
+    voight[5] = matrix[0, 1]
     return voight
+
+
+def poissons_ratio(E: Union[sp.Integer, sp.Float, int, float],
+                   G: Union[sp.Integer, sp.Float, int, float]
+                   ) -> Union[sp.Integer, sp.Float, int, float]:
+    """
+    Calculate Poisson's ratio using the elastic and shear moduli of a material.
+    Parameters
+    ----------
+    E : Union[sp.Integer, sp.Float, int, float].
+        Modulus of elasticity (Young's modulus).
+    G : Union[sp.Integer, sp.Float, int, float].
+        Shear modulus. Sometimes also referred to as mu (one of lame's constants in literature).
+
+    Returns
+    -------
+    Union[sp.Integer, sp.Float, int, float]
+        Poisson's ratio.
+
+    """
+    if E < 0:
+        raise ValueError("`E` must be >= 0.")
+    if G <= 0:
+        raise ValueError("`G` must be > 0.")
+    return E / G / 2 - 1
+
+
+def laplacian(expression: Union[sp.Add, sp.Mul, sp.Pow],
+              symbols: List[sp.Symbol]
+              ) -> Any:
+    """
+    Calculate the Laplacian of a scalar value.
+
+    Parameters
+    ----------
+    expression : Union[sp.Add, sp.Mul, sp.Pow]
+        Symbolic Sympy expression.
+    symbols : List[sp.Symbol]
+
+    Returns
+    -------
+    Any
+        Symbolic Sympy expression.
+
+    References
+    ----------
+    [1] https://www.mathworks.com/help/symbolic/laplacian.html
+
+    """
+    N = len(symbols)
+    L = sp.Integer(0)
+
+    for i in range(N):
+        L += expression.diff(symbols[i], 2)
+
+    return L
+
+
+def laplacian_matrix(matrix: sp.Matrix, symbols: List[sp.Symbol]) -> sp.Matrix:
+    """
+    Compute the element-wise scalar Laplacian of a 2-dimensional matrix.
+
+    Parameters
+    ----------
+    matrix : sp.Matrix
+        2-dimensional matrix.
+    symbols : List[sp.Symbol]
+        Variables of which to compute the Laplacian with respect.
+
+    Returns
+    -------
+    sp.Matrix
+        The element-wise scalar Laplacian.
+
+    References
+    ----------
+    [1] https://www.mathworks.com/help/symbolic/laplacian.html
+
+    """
+    N = len(symbols)
+    L_matrix = sp.zeros(N)
+
+    for i in range(N):
+        for j in range(N):
+            L_matrix[i, j] = laplacian(matrix[i, j], symbols)
+
+    return L_matrix
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
