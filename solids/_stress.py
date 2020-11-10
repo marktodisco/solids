@@ -1,10 +1,9 @@
-from IPython.display import Math, display
+from typing import Union, Tuple
+
 import numpy as np
 import sympy as sp
-from typing import List
-from collections import deque
-from ._base import show, char_poly
 
+from ._base import show, char_poly
 
 __all__ = [
     'principal_stresses',
@@ -18,8 +17,10 @@ __all__ = [
 ]
 
 
-def principal_stresses(
-        sig: sp.Matrix, dtype='numpy', display: bool = True) -> sp.Matrix:
+def principal_stresses(sig: Union[sp.Matrix, np.ndarray],
+                       dtype='numpy',
+                       display: bool = True
+                       ) -> Union[Tuple[np.ndarray, np.ndarray], Tuple[sp.Matrix, sp.Matrix]]:
     """
     Calculate the principal stress and principal axes of the stress matrix
     `sig`.
@@ -52,7 +53,7 @@ def principal_stresses(
         d, v = np.linalg.eig(sig)
         
         # Sort eigenvalues and eigenvectors
-        sort_idx = sorted(range(d.size), key=lambda i: d[i], reverse=True)
+        sort_idx = sorted(range(d.size), key=lambda x: d[x], reverse=True)
         sorted_d = np.zeros_like(d)
         sorted_v = np.zeros_like(v)
         for i in range(d.size):
@@ -62,7 +63,7 @@ def principal_stresses(
         ret = (sorted_d, sorted_v)
     
     elif dtype == 'sympy':
-        # Calculate the eigevnvalues and eigenvectors.
+        # Calculate the eigenvalues and eigenvectors.
         sig = sp.Matrix(sig).n()
         pr = sp.Matrix(sig).eigenvects(multiple=True)
 
@@ -97,7 +98,7 @@ def principal_stresses(
     return ret
 
 
-def invariants(sig: sp.Matrix) -> sp.Matrix:
+def invariants(sig: Union[sp.Matrix, np.ndarray]) -> Union[sp.Matrix, np.ndarray]:
     """
     Compute the invariants if sig.
 
@@ -120,12 +121,17 @@ def invariants(sig: sp.Matrix) -> sp.Matrix:
     elif isinstance(sig, np.ndarray):
         temp = sig.copy()
         M = []
+
         for i in range(3):
             M.append(np.delete(np.delete(temp, i, axis=0), i, axis=1))
+
         q = np.zeros((3,))
         q[0] = sig.trace()
         q[1] = sum([np.linalg.det(m) for m in M])
         q[2] = np.linalg.det(sig)
+
+    else:
+        raise ValueError("Argument `sig` must be a sympy matrix or numpy array.")
     
     return q
 
@@ -145,17 +151,18 @@ def octahedral_shear(
 
     Returns
     -------
-    The shear component of stress on an octehedral plane.
+    The shear component of stress on an octahedral plane.
     
     """
-    if not isinstance(sig, np.ndarray):
+    if isinstance(sig, (list, sp.Matrix)):
         sig = np.asarray(sig, dtype='float64')
-    
+    else:
+        raise ValueError("Argument `sig` must be a numpy array, list, or sympy matrix.")
+
     if not principal:
         pr_sig, _ = principal_stresses(sig, dtype='numpy', display=False)
-    else:
-        if 1 in sig.shape:
-            pr_sig = np.asarray(sig).flatten()
+
+    pr_sig = np.asarray(sig).flatten()
     
     result = (pr_sig[0] - pr_sig[1])**2
     result += (pr_sig[1] - pr_sig[2])**2
@@ -194,7 +201,7 @@ def octahedral_normal(sig: np.ndarray, principal=False) -> float:
     return pr_sig.mean()
 
 
-def check_invariants(Q, SS, symbol):
+def check_invariants(Q, SS):
     def check(x):
         return x**3 - Q[0]*x**2 + Q[1]*x - Q[2]
     return [check(s).n(chop=True) for s in SS]
@@ -216,14 +223,13 @@ def stress_field(x: sp.Matrix, v: list):
     sf : sympy.matrices.dense.MutableDenseMatrix
         Stress corresponding to `x` and `v`.
     admissible : bool
-        Return True if the state of stress is admissable; False otherwise.
+        Return True if the state of stress is admissible; False otherwise.
+
     """
-    
     xc = x.copy()
     n, m = xc.shape
     
-    assert len(v) == n, \
-        "Number of variables must match the number of columns of x."
+    assert len(v) == n, "Number of variables must match the number of columns of x."
     
     # Compute the derivatives.
     for i in range(n):
@@ -392,4 +398,3 @@ class StressState:
     
     def __repr__(self):
         return self.__str__()
-
