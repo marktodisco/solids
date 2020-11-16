@@ -136,8 +136,7 @@ def invariants(sig: Union[sp.Matrix, np.ndarray]) -> Union[sp.Matrix, np.ndarray
     return q
 
 
-def octahedral_shear(
-        sig: np.ndarray, principal: bool = False):
+def octahedral_shear(sig: np.ndarray, principal: bool = False):
     """
     Compute the shear component on an octahedral plane.
 
@@ -159,10 +158,10 @@ def octahedral_shear(
     else:
         raise ValueError("Argument `sig` must be a numpy array, list, or sympy matrix.")
 
-    if not principal:
+    if principal:
+        pr_sig = np.asarray(sig).flatten()
+    else:
         pr_sig, _ = principal_stresses(sig, dtype='numpy', display=False)
-
-    pr_sig = np.asarray(sig).flatten()
     
     result = (pr_sig[0] - pr_sig[1])**2
     result += (pr_sig[1] - pr_sig[2])**2
