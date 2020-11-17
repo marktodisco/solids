@@ -204,16 +204,16 @@ class StrainState(StressState):
 
         return self._octahedral_normal
 
-    @property
-    def max_shear(self):
-        if self._max_shear is None:
-            if self._pr_stress is None:
-                self._pr_stress, _ = principal_stresses(
-                    self._sigma, dtype='numpy', display=False)
-
-            self._max_shear = 2. * max_shear(self._pr_stress, principal=True)
-
-        return self._max_shear
+    # @property
+    # def max_shear(self):
+    #     if self._max_shear is None:
+    #         if self._pr_stress is None:
+    #             self._pr_stress, _ = principal_stresses(
+    #                 self._sigma, dtype='numpy', display=False)
+    #
+    #         self._max_shear = 2. * max_shear(self._pr_stress, principal=True)
+    #
+    #     return self._max_shear
 
     def _report_numpy(self):
         self._custom_print('State of Stress', self._sigma)
