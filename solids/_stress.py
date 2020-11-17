@@ -273,6 +273,8 @@ class StressState:
         self._octahedral_normal = None
         self._max_shear = None
         self._char_poly = None
+        self._mean_normal = None
+        self._deviator = None
         
     def full_report(self):
         self._get_principal()
@@ -335,6 +337,13 @@ class StressState:
             self._max_shear = max_shear(self._pr_stress, principal=True)
         
         return self._max_shear
+
+    @property
+    def decompose(self):
+        self._mean_normal = sum([self._sigma[i, i] for i in range(3)]) / 3
+        self._mean_normal = sp.diag(*[self._mean_normal]*3)
+        self._deviator = self._sigma - self._mean_normal
+        return self._mean_normal, self._deviator
     
     @property
     def char_poly(self):
