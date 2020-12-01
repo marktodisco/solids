@@ -53,16 +53,3 @@ class TestStrainState(unittest.TestCase):
         self.assertEqual(deviator, sp.Matrix([['29/1500000', '3/1000000', '1/500000'],
                                               ['3/1000000', '-1/93750', '1/200000'],
                                               ['1/500000', '1/200000', '-13/1500000']]))
-
-
-
-
-
-
-
-
-
-
-
-
-
