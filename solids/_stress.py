@@ -13,7 +13,8 @@ __all__ = [
     'check_invariants',
     'stress_field',
     'StressState',
-    'max_shear'
+    'max_shear',
+    'PrandtlStress'
 ]
 
 
@@ -406,3 +407,57 @@ class StressState:
     
     def __repr__(self):
         return self.__str__()
+
+
+class PrandtlStress:
+    def __init__(self, phi, x, y):
+        self.x, self.y = x, y
+        self.phi = phi
+        self.G = sp.Symbol('G')
+
+        self.H = phi.diff(x, 2) + phi.diff(y, 2)
+
+        self.sigma_xz = self.phi.diff(self.y)
+        self.sigma_yz = -self.phi.diff(self.x)
+
+        self.eps_xz = self.sigma_xz / self.G / 2
+        self.eps_yz = self.sigma_yz / self.G / 2
+
+        self.alpha = -self.H / self.G / 2
+
+        self.tau = sp.sqrt(self.sigma_xz**2 + self.sigma_yz**2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
