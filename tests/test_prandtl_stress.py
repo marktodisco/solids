@@ -2,7 +2,7 @@ import unittest
 
 import sympy as sp
 
-from solids._stress import PrandtlStress
+from solids.stress import PrandtlStress
 
 
 class TestPrandtlStress(unittest.TestCase):

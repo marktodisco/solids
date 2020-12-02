@@ -2,8 +2,8 @@ import unittest
 
 import sympy as sp
 
-from solids._base import voigt_to_matrix
-from solids._compatibility import equilibrium
+from solids.base import voigt_to_matrix
+from solids.compatibility import equilibrium
 
 
 class TestCompatibility(unittest.TestCase):

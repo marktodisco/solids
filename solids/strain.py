@@ -4,7 +4,7 @@ from typing import Tuple, Union
 import sympy as sp
 
 from solids.base import jacobian, show
-from solids._stress import StressState, octahedral_shear, octahedral_normal, principal_stresses, max_shear
+from solids.stress import StressState, octahedral_shear, octahedral_normal, principal_stresses, max_shear
 
 __all__ = [
     'strain',

@@ -414,6 +414,7 @@ def poissons_ratio(E: Union[sp.Integer, sp.Float, int, float],
                    ) -> Union[sp.Integer, sp.Float, int, float]:
     """
     Calculate Poisson's ratio using the elastic and shear moduli of a material.
+    
     Parameters
     ----------
     E : Union[sp.Integer, sp.Float, int, float].

@@ -1,4 +1,4 @@
-from ._base import *
-from ._stress import *
-from ._strain import *
-from solids import _compatibility as compatibility
+from .base import *
+from .stress import *
+from .strain import *
+from solids import compatibility as compatibility
