@@ -1,0 +1,10 @@
+dependencies:
+  - python=3.7
+  - pip
+  - numpy
+  - matplotlib
+  - notebook
+  - pip:
+    - Sphinx
+    - numpydoc
+    - -e C:/Users/Windows/OneDrive/School/2020-3-Fall/MECH-5620-Solid-Mechanics-I/solids

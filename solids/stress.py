@@ -3,7 +3,7 @@ from typing import Union, Tuple
 import numpy as np
 import sympy as sp
 
-from ._base import show, char_poly
+from .base import show, char_poly
 
 __all__ = [
     'principal_stresses',
