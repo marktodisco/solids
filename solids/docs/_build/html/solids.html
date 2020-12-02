@@ -1,0 +1,849 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>solids package &mdash; solids  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="solids" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> solids
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">solids</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">solids package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-solids.base">solids.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-solids.compatibility">solids.compatibility module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-solids.strain">solids.strain module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-solids.stress">solids.stress module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-solids">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">solids</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">solids</a> &raquo;</li>
+        
+      <li>solids package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/solids.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="solids-package">
+<h1>solids package<a class="headerlink" href="#solids-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-solids.base">
+<span id="solids-base-module"></span><h2>solids.base module<a class="headerlink" href="#module-solids.base" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="solids.base.char_poly">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">char_poly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sig</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.core.relational.Equality<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">]</span><a class="headerlink" href="#solids.base.char_poly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.compatibility_matrix">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">compatibility_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">E</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">G</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nu</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.compatibility_matrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.cross">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">cross</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.cross" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.elasticity_matrix">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">elasticity_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lame</span><span class="p">:</span> <span class="n">sympy.core.numbers.Integer</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">G</span><span class="p">:</span> <span class="n">sympy.core.numbers.Integer</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">]</span><a class="headerlink" href="#solids.base.elasticity_matrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.get_missing">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">get_missing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">E</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">G</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nu</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.get_missing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.jacobian">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">u</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">List<span class="p">[</span>sympy.core.symbol.Symbol<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.base.jacobian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.lame_constant">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">lame_constant</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">E</span></em>, <em class="sig-param"><span class="n">nu</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.lame_constant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.laplacian">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">laplacian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expression</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.core.add.Add<span class="p">, </span>sympy.core.mul.Mul<span class="p">, </span>sympy.core.power.Pow<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">symbols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>sympy.core.symbol.Symbol<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#solids.base.laplacian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Laplacian of a scalar value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>expression</strong><span class="classifier">Union[sp.Add, sp.Mul, sp.Pow]</span></dt><dd><p>Symbolic Sympy expression.</p>
+</dd>
+<dt><strong>symbols</strong><span class="classifier">List[sp.Symbol]</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Any</dt><dd><p>Symbolic Sympy expression.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>[1] <a class="reference external" href="https://www.mathworks.com/help/symbolic/laplacian.html">https://www.mathworks.com/help/symbolic/laplacian.html</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.laplacian_matrix">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">laplacian_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">symbols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>sympy.core.symbol.Symbol<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.base.laplacian_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the element-wise scalar Laplacian of a 2-dimensional matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>matrix</strong><span class="classifier">sp.Matrix</span></dt><dd><p>2-dimensional matrix.</p>
+</dd>
+<dt><strong>symbols</strong><span class="classifier">List[sp.Symbol]</span></dt><dd><p>Variables of which to compute the Laplacian with respect.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>sp.Matrix</dt><dd><p>The element-wise scalar Laplacian.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>[1] <a class="reference external" href="https://www.mathworks.com/help/symbolic/laplacian.html">https://www.mathworks.com/help/symbolic/laplacian.html</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.matrix_round">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">matrix_round</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mat</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">precision</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.matrix_round" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.matrix_to_voigt">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">matrix_to_voigt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.base.matrix_to_voigt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a 2D symmetric matrix to a vector in standard Voight notation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>matrix: (3, 3) sp.matrix</strong></dt><dd><p>2D matrix with 3 dimensions.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>(6, 1) sp.matrix</dt><dd><p>1D vector.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>[1] <a class="reference external" href="https://en.wikipedia.org/wiki/Voigt_notation">https://en.wikipedia.org/wiki/Voigt_notation</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.mean_deviator">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">mean_deviator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eps</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span> &#x2192; Tuple<a class="headerlink" href="#solids.base.mean_deviator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.poissons_ratio">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">poissons_ratio</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">E</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.core.numbers.Integer<span class="p">, </span>sympy.core.numbers.Float<span class="p">, </span>int<span class="p">, </span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">G</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.core.numbers.Integer<span class="p">, </span>sympy.core.numbers.Float<span class="p">, </span>int<span class="p">, </span>float<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>sympy.core.numbers.Integer<span class="p">, </span>sympy.core.numbers.Float<span class="p">, </span>int<span class="p">, </span>float<span class="p">]</span><a class="headerlink" href="#solids.base.poissons_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate Poisson’s ratio using the elastic and shear moduli of a material.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>E</strong><span class="classifier">Union[sp.Integer, sp.Float, int, float].</span></dt><dd><p>Modulus of elasticity (Young’s modulus).</p>
+</dd>
+<dt><strong>G</strong><span class="classifier">Union[sp.Integer, sp.Float, int, float].</span></dt><dd><p>Shear modulus. Sometimes also referred to as mu (one of lame’s constants in literature).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Union[sp.Integer, sp.Float, int, float]</dt><dd><p>Poisson’s ratio.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.ref">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">ref</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">display</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.base.ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the matrix S to row echelon form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>S</strong><span class="classifier">Matrix</span></dt><dd><p>Matrix to transform.</p>
+</dd>
+<dt><strong>display</strong><span class="classifier">bool, optional</span></dt><dd><p>Display the results in Jupyter notebook. The default True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Matrix</dt><dd><p>[description]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.rotation_matrix">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">rotation_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">theta</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">unit</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'rad'</span></em>, <em class="sig-param"><span class="n">numpy</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a z-axis rotation matrix given an angle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>theta</strong><span class="classifier">int</span></dt><dd><p>Rotation about the z-axis</p>
+</dd>
+<dt><strong>unit</strong><span class="classifier">{‘rad’, ‘deg’}, optional</span></dt><dd><p>Radians or degrees. By default ‘rad’.</p>
+</dd>
+<dt><strong>numpy</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, return a Numpy array, otherwise return a sympy matrix.
+By default False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>{np.array, sp.Matrix}</dt><dd><p>If <cite>numpy</cite> is True, will return rotation matrix as np.array. Otherwise,
+will return a sp.Matrix.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.save_latex">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">save_latex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em>, <em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.save_latex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.show">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em>, <em class="sig-param"><span class="n">prefix</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">postfix</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#solids.base.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display latex math in Jupyter Notebook.txt</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>expr</strong></dt><dd><p>Sympy expression to display.</p>
+</dd>
+<dt><strong>prefix</strong><span class="classifier">str, optional</span></dt><dd><p>Insert <cite>prefix</cite> before <cite>expr</cite>, by default None</p>
+</dd>
+<dt><strong>postfix</strong><span class="classifier">str, optional</span></dt><dd><p>Insert <cite>postfix</cite> before <cite>expr</cite>, by default None</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.symmetric">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">symmetric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sig</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.base.symmetric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.to_numpy">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">to_numpy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">diag</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">'float64'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.to_numpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Covert a sympy matrix to a numpy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>(N x M) ndarray.</dt><dd></dd>
+<dt>If diag=True: (max(x.shape) x max(x.shape)) ndarray</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.base.voigt_to_matrix">
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">voigt_to_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">voight</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>list<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.base.voigt_to_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a vector in standard Voight notation to a 2D symmetric matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>voight: (6, 1) sp.matrix</strong></dt><dd><p>1D vector.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>(3, 3) sp.matrix</dt><dd><p>2D matrix with 3 dimensions.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Voigt_notation">https://en.wikipedia.org/wiki/Voigt_notation</a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-solids.compatibility">
+<span id="solids-compatibility-module"></span><h2>solids.compatibility module<a class="headerlink" href="#module-solids.compatibility" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="solids.compatibility.equilibrium">
+<code class="sig-prename descclassname">solids.compatibility.</code><code class="sig-name descname">equilibrium</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">f</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>list<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>bool<span class="p">]</span><a class="headerlink" href="#solids.compatibility.equilibrium" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.compatibility.from_stress">
+<code class="sig-prename descclassname">solids.compatibility.</code><code class="sig-name descname">from_stress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">f</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>list<span class="p">, </span>tuple<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>list<span class="p">, </span>tuple<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.compatibility.from_stress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the compatibility conditions of a state of stress for body forces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sigma</strong><span class="classifier">sp.Matrix</span></dt><dd><p>Stress matrix.</p>
+</dd>
+<dt><strong>f</strong><span class="classifier">Union[sp.Matrix, list, tuple]</span></dt><dd><p>Body forces.</p>
+</dd>
+<dt><strong>v: Union[sp.Matrix, list, tuple]</strong></dt><dd><p>Differentiation variables of which <cite>f</cite> and <cite>sigma</cite> are functions.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>sp.Matrix[sp.Eq]</dt><dd><p>Compatibility equations  Sympy equations in the form of a 2D (3 x 3) matrix.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>[1] Introduction to Linear Elasticity 3rd Edition. pg. 102. Equation 5.16.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.compatibility.st_venant_compatibility">
+<code class="sig-prename descclassname">solids.compatibility.</code><code class="sig-name descname">st_venant_compatibility</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">symbols</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">strain_field</span><span class="p">:</span> <span class="n">dict</span></em>, <em class="sig-param"><span class="n">full</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#solids.compatibility.st_venant_compatibility" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the St. Venant compatibility equations for a state of strain_field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>symbols</strong><span class="classifier">list</span></dt><dd><p>Sympy symbols by which <cite>strain_field</cite> are defined.</p>
+</dd>
+<dt><strong>strain_field</strong><span class="classifier">Union[dict, sp.Matrix]</span></dt><dd><dl class="simple">
+<dt>If dict:</dt><dd><p>Mapping of strain_field to state-equations.
+Keys must be {11, 22, 33, 12, 23, 13}.
+Diagonal symmetry is assumed.
+i.e. (12 = 21), (23 = 32), and (13 = 31).</p>
+</dd>
+<dt>If sp.Matrix:</dt><dd><p>Full-form 3 x 3 strain matrix must be supplied.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>full</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, shows latex representation of the compatibility equations.
+The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>list</dt><dd><p>Simplified compatibility equations. Use Sympy’s <cite>solve</cite> to calculate
+the solution to the system of linear system of equations.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-solids.strain">
+<span id="solids-strain-module"></span><h2>solids.strain module<a class="headerlink" href="#module-solids.strain" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="solids.strain.StrainState">
+<em class="property">class </em><code class="sig-prename descclassname">solids.strain.</code><code class="sig-name descname">StrainState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">dtype</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.strain.StrainState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#solids.stress.StressState" title="solids.stress.StressState"><code class="xref py py-class docutils literal notranslate"><span class="pre">solids.stress.StressState</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>char_poly</strong></dt><dd></dd>
+<dt><strong>decompose</strong></dt><dd></dd>
+<dt><strong>invariants</strong></dt><dd></dd>
+<dt><strong>max_shear</strong></dt><dd></dd>
+<dt><strong>octahedral_normal</strong></dt><dd></dd>
+<dt><strong>octahedral_shear</strong></dt><dd></dd>
+<dt><strong>principal_axes</strong></dt><dd></dd>
+<dt><strong>principal_strain</strong></dt><dd></dd>
+<dt><strong>principal_stresses</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 60%" />
+<col style="width: 40%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>full_report</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="solids.strain.StrainState.full_report">
+<code class="sig-name descname">full_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solids.strain.StrainState.full_report" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.strain.StrainState.octahedral_normal">
+<em class="property">property </em><code class="sig-name descname">octahedral_normal</code><a class="headerlink" href="#solids.strain.StrainState.octahedral_normal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.strain.StrainState.principal_strain">
+<em class="property">property </em><code class="sig-name descname">principal_strain</code><a class="headerlink" href="#solids.strain.StrainState.principal_strain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.strain.strain">
+<code class="sig-prename descclassname">solids.strain.</code><code class="sig-name descname">strain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">u</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">H</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ret_H</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">]</span><span class="p">, </span>Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#solids.strain.strain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate infinitesimal strain, infinitesimal rotation, Lagrangian strain, and
+Eulerian strain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>u</strong><span class="classifier">list, optional</span></dt><dd><p>Symbolic strain field, by default None</p>
+</dd>
+<dt><strong>v</strong><span class="classifier">list, optional</span></dt><dd><p>Symbols to differentiate wrt, by default None</p>
+</dd>
+<dt><strong>H</strong><span class="classifier">sp.Matrix, optional</span></dt><dd><p>Derivative matrix of the strain field equations, by default None</p>
+</dd>
+<dt><strong>ret_H</strong><span class="classifier">bool, optional</span></dt><dd><p>Return the deriavtives matrix H.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[sp.Matrix, sp.Matrix, sp.Matrix, sp.Matrix]</dt><dd><p>infinitesimal strain, infinitesimal rotation, Lagrangian strain, and
+Eulerian strain. (epsilon, omega, E, e)</p>
+</dd>
+<dt>If ret_H is True</dt><dd></dd>
+<dt>Tuple[sp.Matrix, sp.Matrix, sp.Matrix, sp.Matrix, sp.Matrix]</dt><dd><p>infinitesimal strain, infinitesimal rotation, Lagrangian strain, and
+Eulerian strain. (epsilon, omega, E, e, H)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If <cite>u</cite> and <cite>H</cite> are both unspecified.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If <cite>u</cite> is specified, <cite>v</cite> must also be specified.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-solids.stress">
+<span id="solids-stress-module"></span><h2>solids.stress module<a class="headerlink" href="#module-solids.stress" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="solids.stress.PrandtlStress">
+<em class="property">class </em><code class="sig-prename descclassname">solids.stress.</code><code class="sig-name descname">PrandtlStress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.stress.PrandtlStress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="solids.stress.StressState">
+<em class="property">class </em><code class="sig-prename descclassname">solids.stress.</code><code class="sig-name descname">StressState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">dtype</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.stress.StressState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>char_poly</strong></dt><dd></dd>
+<dt><strong>decompose</strong></dt><dd></dd>
+<dt><strong>invariants</strong></dt><dd></dd>
+<dt><strong>max_shear</strong></dt><dd></dd>
+<dt><strong>octahedral_normal</strong></dt><dd></dd>
+<dt><strong>octahedral_shear</strong></dt><dd></dd>
+<dt><strong>principal_axes</strong></dt><dd></dd>
+<dt><strong>principal_stresses</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 60%" />
+<col style="width: 40%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>full_report</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="solids.stress.StressState.char_poly">
+<em class="property">property </em><code class="sig-name descname">char_poly</code><a class="headerlink" href="#solids.stress.StressState.char_poly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.StressState.decompose">
+<em class="property">property </em><code class="sig-name descname">decompose</code><a class="headerlink" href="#solids.stress.StressState.decompose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.StressState.full_report">
+<code class="sig-name descname">full_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solids.stress.StressState.full_report" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.StressState.invariants">
+<em class="property">property </em><code class="sig-name descname">invariants</code><a class="headerlink" href="#solids.stress.StressState.invariants" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.StressState.max_shear">
+<em class="property">property </em><code class="sig-name descname">max_shear</code><a class="headerlink" href="#solids.stress.StressState.max_shear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.StressState.octahedral_normal">
+<em class="property">property </em><code class="sig-name descname">octahedral_normal</code><a class="headerlink" href="#solids.stress.StressState.octahedral_normal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.StressState.octahedral_shear">
+<em class="property">property </em><code class="sig-name descname">octahedral_shear</code><a class="headerlink" href="#solids.stress.StressState.octahedral_shear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.StressState.principal_axes">
+<em class="property">property </em><code class="sig-name descname">principal_axes</code><a class="headerlink" href="#solids.stress.StressState.principal_axes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.StressState.principal_stresses">
+<em class="property">property </em><code class="sig-name descname">principal_stresses</code><a class="headerlink" href="#solids.stress.StressState.principal_stresses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.stress.check_invariants">
+<code class="sig-prename descclassname">solids.stress.</code><code class="sig-name descname">check_invariants</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Q</span></em>, <em class="sig-param"><span class="n">SS</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.stress.check_invariants" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.stress.invariants">
+<code class="sig-prename descclassname">solids.stress.</code><code class="sig-name descname">invariants</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sig</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>numpy.ndarray<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>numpy.ndarray<span class="p">]</span><a class="headerlink" href="#solids.stress.invariants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the invariants if sig.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sig</strong><span class="classifier">Matrix</span></dt><dd><p>Matrix whose invariants will be computed.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Matrix</dt><dd><p>The invariants of sig.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.stress.max_shear">
+<code class="sig-prename descclassname">solids.stress.</code><code class="sig-name descname">max_shear</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">principal</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#solids.stress.max_shear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.stress.octahedral_normal">
+<code class="sig-prename descclassname">solids.stress.</code><code class="sig-name descname">octahedral_normal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sig</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">principal</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#solids.stress.octahedral_normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the normal component of stress on an octahedral plane.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sig</strong><span class="classifier">(3, 3) np.ndarray</span></dt><dd><p>Stress matrix.</p>
+</dd>
+<dt><strong>principal</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, allows the user to pass a 1D array of principal stresses to
+sig. Default if False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>The normal component of stress on an octahedral plane.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.stress.octahedral_shear">
+<code class="sig-prename descclassname">solids.stress.</code><code class="sig-name descname">octahedral_shear</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sig</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">principal</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.stress.octahedral_shear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the shear component on an octahedral plane.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sig</strong><span class="classifier">(3, 3) np.ndarray</span></dt><dd><p>Stress matrix.</p>
+</dd>
+<dt><strong>principal</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, allows the user to pass a 1D array of principal stresses to
+sig. Default if False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>The shear component of stress on an octahedral plane.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.stress.principal_stresses">
+<code class="sig-prename descclassname">solids.stress.</code><code class="sig-name descname">principal_stresses</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sig</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>numpy.ndarray<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">'numpy'</span></em>, <em class="sig-param"><span class="n">display</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>Tuple<span class="p">[</span>numpy.ndarray<span class="p">, </span>numpy.ndarray<span class="p">]</span><span class="p">, </span>Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#solids.stress.principal_stresses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the principal stress and principal axes of the stress matrix
+<cite>sig</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sig</strong><span class="classifier">Matrix</span></dt><dd><p>Stress matrix.</p>
+</dd>
+<dt><strong>dtype</strong><span class="classifier">str, {‘numpy’, ‘matrix’}, optional</span></dt><dd><p>Return type of the solution. Use ‘numpy’ to return np.ndarray. Use
+‘matrix’ to return sympy.Matrix. The default is ‘numpy’.</p>
+</dd>
+<dt><strong>display</strong><span class="classifier">bool, optional</span></dt><dd><p>Display the results automatically.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[Matrix, Matrix]</dt><dd><p>First element is the sorted principal stresses.
+The second element is the eigenvectors of sig in the form of a Matrix.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If dtype is not one of {‘numpy’, ‘sympy’}.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.stress.stress_field">
+<code class="sig-prename descclassname">solids.stress.</code><code class="sig-name descname">stress_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.stress.stress_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the stress field, and determine admissibility.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sf</strong><span class="classifier">sympy.matrices.dense.MutableDenseMatrix</span></dt><dd><p>Stress corresponding to <cite>x</cite> and <cite>v</cite>.</p>
+</dd>
+<dt><strong>admissible</strong><span class="classifier">bool</span></dt><dd><p>Return True if the state of stress is admissible; False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-solids">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-solids" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="modules.html" class="btn btn-neutral float-left" title="solids" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Mark Todisco
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
