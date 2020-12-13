@@ -5,6 +5,6 @@ dependencies:
   - matplotlib
   - notebook
   - pip:
+    - setuptools
     - Sphinx
-    - numpydoc
-    - -e C:/Users/Windows/OneDrive/School/2020-3-Fall/MECH-5620-Solid-Mechanics-I/solids
+    - -e .
