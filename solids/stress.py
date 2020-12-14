@@ -249,6 +249,22 @@ def stress_field(x: sp.Matrix, v: list):
 
 
 def max_shear(sigma: np.ndarray, principal=False) -> float:
+    """
+    Calculate the maximum shear stress.
+
+    Parameters
+    ----------
+    sigma : array
+        Stress matrix
+    principal : bool, optional
+        If True, `sigma` is assumed to be a list of principal stresses. Default is True.
+
+    Returns
+    -------
+    float
+        Maximum shear stress.
+
+    """
     if not isinstance(sigma, np.ndarray):
         sigma = np.asarray(sigma, dtype='float64')
         
@@ -411,54 +427,84 @@ class StressState:
 
 
 class PrandtlStress:
+    """
+    Calculate the stress and strain given the Prandtl stress function.
+
+    Attributes
+    ----------
+    H
+    phi
+    G
+    sigma_xz
+    sigma_yz
+    eps_xz
+    eps_yz
+    alpha
+    tau
+
+    Methods
+    -------
+    __init__(phi, x, y)
+
+    """
     def __init__(self, phi, x, y):
-        self.x, self.y = x, y
-        self.phi = phi
-        self.G = sp.Symbol('G')
+        """
+        butt
 
-        self.H = phi.diff(x, 2) + phi.diff(y, 2)
+        Parameters
+        ----------
+        phi
+        x
+        y
+        """
+        self._x, self._y = x, y
+        self._phi = phi
+        self._G = sp.Symbol('G')
 
-        self.sigma_xz = self.phi.diff(self.y)
-        self.sigma_yz = -self.phi.diff(self.x)
+        self._H = phi.diff(self._x, 2) + phi.diff(self._y, 2)
 
-        self.eps_xz = self.sigma_xz / self.G / 2
-        self.eps_yz = self.sigma_yz / self.G / 2
+        self._sigma_xz = self._phi.diff(self._y)
+        self._sigma_yz = -self._phi.diff(self._x)
 
-        self.alpha = -self.H / self.G / 2
+        self._eps_xz = self._sigma_xz / self._G / 2
+        self._eps_yz = self._sigma_yz / self._G / 2
 
-        self.tau = sp.sqrt(self.sigma_xz**2 + self.sigma_yz**2)
+        self._alpha = -self._H / self._G / 2
 
+        self._tau = sp.sqrt(self._sigma_xz ** 2 + self._sigma_yz ** 2)
 
+    @property
+    def H(self):
+        return self._H
 
+    @property
+    def phi(self):
+        return self._phi
 
+    @property
+    def G(self):
+        return self._G
 
+    @property
+    def sigma_xz(self):
+        return self._sigma_xz
 
+    @property
+    def sigma_yz(self):
+        return self._sigma_yz
 
+    @property
+    def eps_xz(self):
+        return self._eps_xz
 
+    @property
+    def eps_yz(self):
+        return self._eps_yz
 
+    @property
+    def alpha(self):
+        return self._alpha
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @property
+    def tau(self):
+        return self._tau

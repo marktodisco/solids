@@ -772,29 +772,29 @@ Return 0 if (i, j, k) otherwise.</p>
 <dt id="solids.strain.StrainState">
 <em class="property">class </em><code class="sig-prename descclassname">solids.strain.</code><code class="sig-name descname">StrainState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">dtype</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.strain.StrainState" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#solids.stress.StressState" title="solids.stress.StressState"><code class="xref py py-class docutils literal notranslate"><span class="pre">solids.stress.StressState</span></code></a></p>
+<p>State of strain.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>char_poly</strong></dt><dd></dd>
-<dt><strong>decompose</strong></dt><dd></dd>
-<dt><strong>invariants</strong></dt><dd></dd>
-<dt><strong>max_shear</strong></dt><dd></dd>
-<dt><strong>octahedral_normal</strong></dt><dd></dd>
-<dt><strong>octahedral_shear</strong></dt><dd></dd>
-<dt><strong>principal_axes</strong></dt><dd></dd>
-<dt><strong>principal_strain</strong></dt><dd></dd>
 <dt><strong>principal_stresses</strong></dt><dd></dd>
+<dt><strong>principal_axes</strong></dt><dd></dd>
+<dt><strong>invariants</strong></dt><dd></dd>
+<dt><strong>octahedral_shear</strong></dt><dd></dd>
+<dt><strong>octahedral_normal</strong></dt><dd></dd>
+<dt><strong>max_shear</strong></dt><dd></dd>
+<dt><strong>decompose</strong></dt><dd></dd>
+<dt><strong>char_poly</strong></dt><dd></dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 60%" />
-<col style="width: 40%" />
+<col style="width: 63%" />
+<col style="width: 37%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><strong>full_report</strong></p></td>
+<tr class="row-odd"><td><p><strong>full_report()</strong></p></td>
 <td></td>
 </tr>
 </tbody>
@@ -819,8 +819,8 @@ Return 0 if (i, j, k) otherwise.</p>
 <dl class="py function">
 <dt id="solids.strain.calc_strain">
 <code class="sig-prename descclassname">solids.strain.</code><code class="sig-name descname">calc_strain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">u</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">list</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">H</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ret_H</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">]</span><span class="p">, </span>Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#solids.strain.calc_strain" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate infinitesimal strain, infinitesimal rotation, Lagrangian strain, and
-Eulerian strain.</p>
+<dd><p>Calculate infinitesimal strain, infinitesimal rotation, Lagrangian strain, and Eulerian strain. Either specify <cite>u</cite>
+and <cite>v</cite> together or just <cite>H</cite>. Not all arguments are required.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -847,9 +847,7 @@ Eulerian strain. (epsilon, omega, E, e, H)</p>
 </dd>
 <dt class="field-odd">Raises</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>If <cite>u</cite> and <cite>H</cite> are both unspecified.</p>
-</dd>
-<dt>ValueError</dt><dd><p>If <cite>u</cite> is specified, <cite>v</cite> must also be specified.</p>
+<dt>ValueError</dt><dd><p>If <cite>H</cite> is None, <cite>u</cite> and <cite>v</cite> must not be not None.</p>
 </dd>
 </dl>
 </dd>
@@ -863,6 +861,79 @@ Eulerian strain. (epsilon, omega, E, e, H)</p>
 <dt id="solids.stress.PrandtlStress">
 <em class="property">class </em><code class="sig-prename descclassname">solids.stress.</code><code class="sig-name descname">PrandtlStress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phi</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.stress.PrandtlStress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Calculate the stress and strain given the Prandtl stress function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>H</strong></dt><dd></dd>
+<dt><strong>phi</strong></dt><dd></dd>
+<dt><strong>G</strong></dt><dd></dd>
+<dt><strong>sigma_xz</strong></dt><dd></dd>
+<dt><strong>sigma_yz</strong></dt><dd></dd>
+<dt><strong>eps_xz</strong></dt><dd></dd>
+<dt><strong>eps_yz</strong></dt><dd></dd>
+<dt><strong>alpha</strong></dt><dd></dd>
+<dt><strong>tau</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 70%" />
+<col style="width: 30%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>__init__(phi, x, y)</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="solids.stress.PrandtlStress.G">
+<em class="property">property </em><code class="sig-name descname">G</code><a class="headerlink" href="#solids.stress.PrandtlStress.G" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.PrandtlStress.H">
+<em class="property">property </em><code class="sig-name descname">H</code><a class="headerlink" href="#solids.stress.PrandtlStress.H" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.PrandtlStress.alpha">
+<em class="property">property </em><code class="sig-name descname">alpha</code><a class="headerlink" href="#solids.stress.PrandtlStress.alpha" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.PrandtlStress.eps_xz">
+<em class="property">property </em><code class="sig-name descname">eps_xz</code><a class="headerlink" href="#solids.stress.PrandtlStress.eps_xz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.PrandtlStress.eps_yz">
+<em class="property">property </em><code class="sig-name descname">eps_yz</code><a class="headerlink" href="#solids.stress.PrandtlStress.eps_yz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.PrandtlStress.phi">
+<em class="property">property </em><code class="sig-name descname">phi</code><a class="headerlink" href="#solids.stress.PrandtlStress.phi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.PrandtlStress.sigma_xz">
+<em class="property">property </em><code class="sig-name descname">sigma_xz</code><a class="headerlink" href="#solids.stress.PrandtlStress.sigma_xz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.PrandtlStress.sigma_yz">
+<em class="property">property </em><code class="sig-name descname">sigma_yz</code><a class="headerlink" href="#solids.stress.PrandtlStress.sigma_yz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.stress.PrandtlStress.tau">
+<em class="property">property </em><code class="sig-name descname">tau</code><a class="headerlink" href="#solids.stress.PrandtlStress.tau" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -970,7 +1041,24 @@ Eulerian strain. (epsilon, omega, E, e, H)</p>
 <dl class="py function">
 <dt id="solids.stress.max_shear">
 <code class="sig-prename descclassname">solids.stress.</code><code class="sig-name descname">max_shear</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">principal</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#solids.stress.max_shear" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculate the maximum shear stress.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sigma</strong><span class="classifier">array</span></dt><dd><p>Stress matrix</p>
+</dd>
+<dt><strong>principal</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, <cite>sigma</cite> is assumed to be a list of principal stresses. Default is True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>Maximum shear stress.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="solids.stress.octahedral_normal">
