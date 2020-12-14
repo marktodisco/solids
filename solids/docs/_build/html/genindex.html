@@ -30,6 +30,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -166,6 +167,7 @@
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  
 </div>
@@ -205,6 +207,10 @@
       <li><a href="solids.html#solids.stress.StressState.decompose">decompose() (solids.stress.StressState property)</a>
 </li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="solids.html#solids.cylindrical.ThickWalledCylinder.display_funcs">display_funcs() (solids.cylindrical.ThickWalledCylinder method)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="E">E</h2>
@@ -212,11 +218,17 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="solids.html#solids.base.elasticity_matrix">elasticity_matrix() (in module solids.base)</a>
 </li>
+      <li><a href="solids.html#solids.cylindrical.ThickWalledCylinder.eps_rr">eps_rr() (solids.cylindrical.ThickWalledCylinder property)</a>
+</li>
+      <li><a href="solids.html#solids.cylindrical.ThickWalledCylinder.eps_tt">eps_tt() (solids.cylindrical.ThickWalledCylinder property)</a>
+</li>
       <li><a href="solids.html#solids.stress.PrandtlStress.eps_xz">eps_xz() (solids.stress.PrandtlStress property)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="solids.html#solids.stress.PrandtlStress.eps_yz">eps_yz() (solids.stress.PrandtlStress property)</a>
+</li>
+      <li><a href="solids.html#solids.cylindrical.ThickWalledCylinder.eps_zz">eps_zz() (solids.cylindrical.ThickWalledCylinder property)</a>
 </li>
       <li><a href="solids.compatibility.html#solids.compatibility.equilibrium">equilibrium() (in module solids.compatibility)</a>, <a href="solids.html#solids.compatibility.equilibrium">[1]</a>
 </li>
@@ -228,6 +240,8 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="solids.html#solids.cylindrical.from_cartesian">from_cartesian() (in module solids.cylindrical)</a>
+</li>
       <li><a href="solids.compatibility.html#solids.compatibility.from_stress">from_stress() (in module solids.compatibility)</a>, <a href="solids.html#solids.compatibility.from_stress">[1]</a>
 </li>
   </ul></td>
@@ -320,6 +334,8 @@
 </li>
         <li><a href="solids.compatibility.html#module-solids.compatibility">solids.compatibility</a>, <a href="solids.html#module-solids.compatibility">[1]</a>
 </li>
+        <li><a href="solids.html#module-solids.cylindrical">solids.cylindrical</a>
+</li>
         <li><a href="solids.html#module-solids.math">solids.math</a>, <a href="solids.math.html#module-solids.math">[1]</a>
 </li>
         <li><a href="solids.html#module-solids.strain">solids.strain</a>
@@ -397,6 +413,12 @@
 </li>
       <li><a href="solids.html#solids.base.show">show() (in module solids.base)</a>
 </li>
+      <li><a href="solids.html#solids.cylindrical.ThickWalledCylinder.sig_rr">sig_rr() (solids.cylindrical.ThickWalledCylinder property)</a>
+</li>
+      <li><a href="solids.html#solids.cylindrical.ThickWalledCylinder.sig_tt">sig_tt() (solids.cylindrical.ThickWalledCylinder property)</a>
+</li>
+      <li><a href="solids.html#solids.cylindrical.ThickWalledCylinder.sig_zz">sig_zz() (solids.cylindrical.ThickWalledCylinder property)</a>
+</li>
       <li><a href="solids.html#solids.stress.PrandtlStress.sigma_xz">sigma_xz() (solids.stress.PrandtlStress property)</a>
 </li>
       <li><a href="solids.html#solids.stress.PrandtlStress.sigma_yz">sigma_yz() (solids.stress.PrandtlStress property)</a>
@@ -424,6 +446,13 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    solids.cylindrical
+
+      <ul>
+        <li><a href="solids.html#module-solids.cylindrical">module</a>
+</li>
+      </ul></li>
       <li>
     solids.math
 
@@ -465,7 +494,21 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="solids.html#solids.cylindrical.ThickWalledCylinder">ThickWalledCylinder (class in solids.cylindrical)</a>
+</li>
       <li><a href="solids.html#solids.base.to_numpy">to_numpy() (in module solids.base)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="solids.html#solids.cylindrical.ThickWalledCylinder.u_r">u_r() (solids.cylindrical.ThickWalledCylinder property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="solids.html#solids.cylindrical.ThickWalledCylinder.u_t">u_t() (solids.cylindrical.ThickWalledCylinder property)</a>
 </li>
   </ul></td>
 </tr></table>

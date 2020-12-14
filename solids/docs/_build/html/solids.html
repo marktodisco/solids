@@ -30,6 +30,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -88,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-solids.base">solids.base module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-solids.compatibility">solids.compatibility module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-solids.cylindrical">solids.cylindrical module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-solids.math">solids.math module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-solids.strain">solids.strain module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-solids.stress">solids.stress module</a></li>
@@ -173,7 +175,7 @@
 <dl class="py function">
 <dt id="solids.base.compatibility_matrix">
 <code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">compatibility_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">E</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">G</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nu</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">]</span><a class="headerlink" href="#solids.base.compatibility_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the compatibility matrix.</p>
+<dd><p>Compute the compatibility matrix <span class="math notranslate nohighlight">\(D_{ij}\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -197,11 +199,11 @@
 <dl class="py function">
 <dt id="solids.base.elasticity_matrix">
 <code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">elasticity_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lame</span><span class="p">:</span> <span class="n">sympy.core.numbers.Integer</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">G</span><span class="p">:</span> <span class="n">sympy.core.numbers.Integer</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">]</span><a class="headerlink" href="#solids.base.elasticity_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the elasticity matrix <img class="math" src="_images/math/6b70bcae52a568a124c4c8024147cabbfb28ce2f.png" alt="C_{ij}"/>.</p>
+<dd><p>Compute the elasticity matrix <span class="math notranslate nohighlight">\(C_{ij}\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>lame</strong><span class="classifier">Union[Integer, Float]</span></dt><dd><p>Lame constant. Often called <img class="math" src="_images/math/cefc603e5658facb747581f9567192993f21c7ab.png" alt="\lambda"/> in the literature.</p>
+<dt><strong>lame</strong><span class="classifier">Union[Integer, Float]</span></dt><dd><p>Lame constant. Often called <span class="math notranslate nohighlight">\(\lambda\)</span> in the literature.</p>
 </dd>
 <dt><strong>G</strong><span class="classifier">Union[Integer, Float]</span></dt><dd><p>Shear modulus of elasticity.</p>
 </dd>
@@ -214,10 +216,13 @@
 </dl>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<div class="math">
-<p><img src="_images/math/97d506442e76e26815d2876df0be7cfb733ef169.png" alt=""/></p>
-</div></dd></dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#solids.base.lame_constant" title="solids.base.lame_constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solids.base.lame_constant</span></code></a></dt><dd></dd>
+</dl>
+</div>
+</dd></dl>
 
 <dl class="py function">
 <dt id="solids.base.get_missing">
@@ -246,7 +251,7 @@
 <dl class="py function">
 <dt id="solids.base.lame_constant">
 <code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">lame_constant</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">E</span></em>, <em class="sig-param"><span class="n">nu</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.lame_constant" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the Lame constant <img class="math" src="_images/math/cefc603e5658facb747581f9567192993f21c7ab.png" alt="\lambda"/>.</p>
+<dd><p>Calculate the Lame constant <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -258,7 +263,7 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>Union[Integer, Float]</dt><dd><p>Lame constant <img class="math" src="_images/math/cefc603e5658facb747581f9567192993f21c7ab.png" alt="\lambda"/>.</p>
+<dt>Union[Integer, Float]</dt><dd><p>Lame constant <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
 </dd>
 </dl>
 </dd>
@@ -497,7 +502,7 @@ will return a sp.Matrix.</p>
 </dd>
 <dt><strong>f</strong><span class="classifier">list</span></dt><dd><p>List of body forces</p>
 </dd>
-<dt><strong>v</strong><span class="classifier">list</span></dt><dd><p>List of variables, i.e., <img class="math" src="_images/math/888f7c323ac0341871e867220ae2d76467d74d6e.png" alt="x"/>, <img class="math" src="_images/math/1b5e577d6216dca3af7d87aa122a0b9b360d6cb3.png" alt="y"/>, <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/>.</p>
+<dt><strong>v</strong><span class="classifier">list</span></dt><dd><p>List of variables, i.e., <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(z\)</span>.</p>
 </dd>
 </dl>
 </dd>
@@ -576,6 +581,128 @@ the solution to the system of linear system of equations.</p>
 <p class="admonition-title">Warning</p>
 <p>Do not set <code class="docutils literal notranslate"><span class="pre">full=True</span></code> if converting Jupyter notebook to PDF. A LaTeX error will prevent you from completing this action. Instead, set <code class="docutils literal notranslate"><span class="pre">full=False</span></code>.</p>
 </div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-solids.cylindrical">
+<span id="solids-cylindrical-module"></span><h2>solids.cylindrical module<a class="headerlink" href="#module-solids.cylindrical" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="solids.cylindrical.ThickWalledCylinder">
+<em class="property">class </em><code class="sig-prename descclassname">solids.cylindrical.</code><code class="sig-name descname">ThickWalledCylinder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">axial_symmetric</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">plane</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">display</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">Po</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Pi</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Ro</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Ri</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">E</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nu</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.cylindrical.ThickWalledCylinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Make functions for the case of a thick-walled cylinder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>axial_symmetric</strong><span class="classifier">bool, optional</span></dt><dd><p>Default is false</p>
+</dd>
+<dt><strong>plane</strong><span class="classifier">{‘stress’, ‘strain’}</span></dt><dd><p>Plane condition</p>
+</dd>
+<dt><strong>display</strong><span class="classifier">bool, optional</span></dt><dd><p>Display in Jupyter notebook. Default is False.</p>
+</dd>
+<dt><strong>Ri</strong><span class="classifier">Union[Integer, Float]</span></dt><dd><p>Inner radius</p>
+</dd>
+<dt><strong>Ro</strong><span class="classifier">Union[Integer, Float]</span></dt><dd><p>Outer radius</p>
+</dd>
+<dt><strong>Pi</strong><span class="classifier">Union[Integer, Float]</span></dt><dd><p>Internal pressure</p>
+</dd>
+<dt><strong>Po</strong><span class="classifier">Union[Integer, Float]</span></dt><dd><p>External pressure</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>eps_rr</strong></dt><dd></dd>
+<dt><strong>eps_tt</strong></dt><dd></dd>
+<dt><strong>eps_zz</strong></dt><dd></dd>
+<dt><strong>sig_rr</strong></dt><dd></dd>
+<dt><strong>sig_tt</strong></dt><dd></dd>
+<dt><strong>sig_zz</strong></dt><dd></dd>
+<dt><strong>u_r</strong></dt><dd></dd>
+<dt><strong>u_t</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#solids.cylindrical.ThickWalledCylinder.display_funcs" title="solids.cylindrical.ThickWalledCylinder.display_funcs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_funcs</span></code></a>()</p></td>
+<td><p>Display all functions in Jupyter notebook.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="solids.cylindrical.ThickWalledCylinder.display_funcs">
+<code class="sig-name descname">display_funcs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solids.cylindrical.ThickWalledCylinder.display_funcs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display all functions in Jupyter notebook. bababooey</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="solids.cylindrical.ThickWalledCylinder.eps_rr">
+<em class="property">property </em><code class="sig-name descname">eps_rr</code><a class="headerlink" href="#solids.cylindrical.ThickWalledCylinder.eps_rr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.cylindrical.ThickWalledCylinder.eps_tt">
+<em class="property">property </em><code class="sig-name descname">eps_tt</code><a class="headerlink" href="#solids.cylindrical.ThickWalledCylinder.eps_tt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.cylindrical.ThickWalledCylinder.eps_zz">
+<em class="property">property </em><code class="sig-name descname">eps_zz</code><a class="headerlink" href="#solids.cylindrical.ThickWalledCylinder.eps_zz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.cylindrical.ThickWalledCylinder.sig_rr">
+<em class="property">property </em><code class="sig-name descname">sig_rr</code><a class="headerlink" href="#solids.cylindrical.ThickWalledCylinder.sig_rr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.cylindrical.ThickWalledCylinder.sig_tt">
+<em class="property">property </em><code class="sig-name descname">sig_tt</code><a class="headerlink" href="#solids.cylindrical.ThickWalledCylinder.sig_tt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.cylindrical.ThickWalledCylinder.sig_zz">
+<em class="property">property </em><code class="sig-name descname">sig_zz</code><a class="headerlink" href="#solids.cylindrical.ThickWalledCylinder.sig_zz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.cylindrical.ThickWalledCylinder.u_r">
+<em class="property">property </em><code class="sig-name descname">u_r</code><a class="headerlink" href="#solids.cylindrical.ThickWalledCylinder.u_r" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="solids.cylindrical.ThickWalledCylinder.u_t">
+<em class="property">property </em><code class="sig-name descname">u_t</code><a class="headerlink" href="#solids.cylindrical.ThickWalledCylinder.u_t" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.cylindrical.from_cartesian">
+<code class="sig-prename descclassname">solids.cylindrical.</code><code class="sig-name descname">from_cartesian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">theta</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.core.numbers.Integer<span class="p">, </span>sympy.core.numbers.Float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">]</span><a class="headerlink" href="#solids.cylindrical.from_cartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert cartesian matrix to cylindrical coordinate system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sigma</strong><span class="classifier">Matrix</span></dt><dd><p>2D matrix</p>
+</dd>
+<dt><strong>theta</strong><span class="classifier">Union[sp.Integer, sp.Float]</span></dt><dd><p>Rotation angle</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[Matrix, Matrix, Matrix]</dt><dd><p>sig_rr, sig_tt, sig_rt</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -661,7 +788,7 @@ the solution to the system of linear system of equations.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>Matrix</dt><dd><p>Jacobian matrix of <img class="math" src="_images/math/9b444cf6329a14140aee8ff5a06ff30772cc1c2f.png" alt="u"/> with respect to <img class="math" src="_images/math/02d98909b5d6acd6a7ff927d4d42790bdd407d58.png" alt="v"/>.</p>
+<dt>Matrix</dt><dd><p>Jacobian matrix of <span class="math notranslate nohighlight">\(u\)</span> with respect to <span class="math notranslate nohighlight">\(v\)</span>.</p>
 </dd>
 </dl>
 </dd>

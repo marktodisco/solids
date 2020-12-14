@@ -242,9 +242,10 @@ def elasticity_matrix(lame: sp.Integer = None, G: sp.Integer = None) -> Tuple[sp
     Tuple[Matrix, Symbol, Symbol]
         Elasticity matrix, Lame constant symbol, and shear modulus of elasticity symbol.
 
-    Notes
-    -----
-    .. math::
+    See Also
+    --------
+    solids.base.lame_constant
+
     """
     # Create symbols
     lame_constant_, G_ = sp.symbols('lambda, G')
@@ -265,9 +266,17 @@ def elasticity_matrix(lame: sp.Integer = None, G: sp.Integer = None) -> Tuple[sp
     return C, lame_constant_, G_
 
 
+def count_missing(*args):
+    count = 0
+    for arg in args:
+        if not arg:
+            count += 1
+    return count
+
+
 def compatibility_matrix(E=None, G=None, nu=None) -> Tuple[sp.Matrix, sp.Symbol, sp.Symbol, sp.Symbol]:
     """
-    Compute the compatibility matrix.
+    Compute the compatibility matrix :math:`D_{ij}`.
 
     Parameters
     ----------
@@ -293,14 +302,15 @@ def compatibility_matrix(E=None, G=None, nu=None) -> Tuple[sp.Matrix, sp.Symbol,
         D[i, i] = 1 / E_
         D[j, j] = 1 / G_ / 2
 
-    E, G, nu = get_missing(E, G, nu)
+    if count_missing(E, G, nu) == 1:
+        E, G, nu = get_missing(E, G, nu)
 
-    if E is not None:
-        D = D.subs(E_, E)
-    if G is not None:
-        D = D.subs(G_, G)
-    if nu is not None:
-        D = D.subs(nu_, nu)
+        if E is not None:
+            D = D.subs(E_, E)
+        if G is not None:
+            D = D.subs(G_, G)
+        if nu is not None:
+            D = D.subs(nu_, nu)
 
     return D, E_, G_, nu_
 

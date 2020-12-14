@@ -20,6 +20,14 @@ solids.compatibility module
    :undoc-members:
    :show-inheritance:
 
+solids.cylindrical module
+-------------------------
+
+.. automodule:: solids.cylindrical
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 solids.math module
 ------------------
 
