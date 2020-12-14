@@ -30,7 +30,6 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -198,11 +197,11 @@
 <dl class="py function">
 <dt id="solids.base.elasticity_matrix">
 <code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">elasticity_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lame</span><span class="p">:</span> <span class="n">sympy.core.numbers.Integer</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">G</span><span class="p">:</span> <span class="n">sympy.core.numbers.Integer</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">]</span><a class="headerlink" href="#solids.base.elasticity_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the elasticity matrix <span class="math notranslate nohighlight">\(C_{ij}\)</span>.</p>
+<dd><p>Compute the elasticity matrix <img class="math" src="_images/math/6b70bcae52a568a124c4c8024147cabbfb28ce2f.png" alt="C_{ij}"/>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>lame</strong><span class="classifier">Union[Integer, Float]</span></dt><dd><p>Lame constant. Often called <span class="math notranslate nohighlight">\(\lambda\)</span> in the literature.</p>
+<dt><strong>lame</strong><span class="classifier">Union[Integer, Float]</span></dt><dd><p>Lame constant. Often called <img class="math" src="_images/math/cefc603e5658facb747581f9567192993f21c7ab.png" alt="\lambda"/> in the literature.</p>
 </dd>
 <dt><strong>G</strong><span class="classifier">Union[Integer, Float]</span></dt><dd><p>Shear modulus of elasticity.</p>
 </dd>
@@ -216,9 +215,9 @@
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<div class="math notranslate nohighlight">
-\[\]</div>
-</dd></dl>
+<div class="math">
+<p><img src="_images/math/97d506442e76e26815d2876df0be7cfb733ef169.png" alt=""/></p>
+</div></dd></dl>
 
 <dl class="py function">
 <dt id="solids.base.get_missing">
@@ -247,7 +246,7 @@
 <dl class="py function">
 <dt id="solids.base.lame_constant">
 <code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">lame_constant</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">E</span></em>, <em class="sig-param"><span class="n">nu</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.lame_constant" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the Lame constant <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<dd><p>Calculate the Lame constant <img class="math" src="_images/math/cefc603e5658facb747581f9567192993f21c7ab.png" alt="\lambda"/>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -259,7 +258,7 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>Union[Integer, Float]</dt><dd><p>Lame constant <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<dt>Union[Integer, Float]</dt><dd><p>Lame constant <img class="math" src="_images/math/cefc603e5658facb747581f9567192993f21c7ab.png" alt="\lambda"/>.</p>
 </dd>
 </dl>
 </dd>
@@ -498,7 +497,7 @@ will return a sp.Matrix.</p>
 </dd>
 <dt><strong>f</strong><span class="classifier">list</span></dt><dd><p>List of body forces</p>
 </dd>
-<dt><strong>v</strong><span class="classifier">list</span></dt><dd><p>List of variables, i.e., <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(z\)</span>.</p>
+<dt><strong>v</strong><span class="classifier">list</span></dt><dd><p>List of variables, i.e., <img class="math" src="_images/math/888f7c323ac0341871e867220ae2d76467d74d6e.png" alt="x"/>, <img class="math" src="_images/math/1b5e577d6216dca3af7d87aa122a0b9b360d6cb3.png" alt="y"/>, <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/>.</p>
 </dd>
 </dl>
 </dd>
@@ -584,23 +583,90 @@ the solution to the system of linear system of equations.</p>
 <span id="solids-math-module"></span><h2>solids.math module<a class="headerlink" href="#module-solids.math" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="solids.math.char_poly">
-<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">char_poly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sig</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.core.relational.Equality<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">]</span><a class="headerlink" href="#solids.math.char_poly" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">char_poly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.core.relational.Equality<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">]</span><a class="headerlink" href="#solids.math.char_poly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the characteristic polynomial of a matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>matrix</strong><span class="classifier">Matrix</span></dt><dd><p>2D matrix of values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>(Equation, Symbol)</dt><dd><p>Returns the characteristic polynomial equation, and the symbolic variable.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="solids.math.cross">
-<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">cross</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.math.cross" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">cross</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">b</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.math.cross" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the cross product of two vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>a</strong><span class="classifier">Matrix</span></dt><dd><p>First vector.</p>
+</dd>
+<dt><strong>b</strong><span class="classifier">Matrix</span></dt><dd><p>Second vector.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Matrix</dt><dd><p>Returns the cross product between <cite>a</cite> and <cite>b</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="solids.math.even_odd_test">
-<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">even_odd_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">test</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.math.even_odd_test" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">even_odd_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">j</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">test</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#solids.math.even_odd_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if even or odd permutation of (1, 2, 3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd></dd>
+<dt><strong>j</strong><span class="classifier">int</span></dt><dd></dd>
+<dt><strong>k</strong><span class="classifier">int</span></dt><dd></dd>
+<dt><strong>test</strong><span class="classifier">{‘even’, ‘odd’}</span></dt><dd><p>Test case. Must be ‘even’ or ‘odd’.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>Returns True if (i, j, k) is an even/odd permutation of (1, 2, 3) based on <cite>test</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="solids.math.jacobian">
 <code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">u</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">List<span class="p">[</span>sympy.core.symbol.Symbol<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.math.jacobian" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Compute the Jacobian matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>u</strong><span class="classifier">list</span></dt><dd><p>List of functions.</p>
+</dd>
+<dt><strong>v</strong><span class="classifier">List[Symbol]</span></dt><dd><p>List of variables.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Matrix</dt><dd><p>Jacobian matrix of <img class="math" src="_images/math/9b444cf6329a14140aee8ff5a06ff30772cc1c2f.png" alt="u"/> with respect to <img class="math" src="_images/math/02d98909b5d6acd6a7ff927d4d42790bdd407d58.png" alt="v"/>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="solids.math.laplacian">
@@ -651,8 +717,26 @@ the solution to the system of linear system of equations.</p>
 
 <dl class="py function">
 <dt id="solids.math.permutation">
-<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">permutation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.math.permutation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">permutation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">j</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#solids.math.permutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value of the permutation tensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd></dd>
+<dt><strong>j</strong><span class="classifier">int</span></dt><dd></dd>
+<dt><strong>k</strong><span class="classifier">int</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>Return 1 if (i, j, k) is an even permutation.
+Return -1 if (i, j, k) is an odd permutation.
+Return 0 if (i, j, k) otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="solids.math.ref">
@@ -669,11 +753,16 @@ the solution to the system of linear system of equations.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>Matrix</dt><dd><p>[description]</p>
+<dt>Matrix</dt><dd><p><code class="docutils literal notranslate"><span class="pre">S</span></code> in reduced row echelon form.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function is very sensitive to the choice of <code class="docutils literal notranslate"><span class="pre">S</span></code> and is not guaranteed to converge. Use with caution.</p>
+</div>
 </dd></dl>
 
 </div>
