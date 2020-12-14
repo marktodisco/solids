@@ -475,7 +475,7 @@ will return a sp.Matrix.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>(3, 3) sp.matrix</dt><dd><p>2D matrix with 3 dimensions.</p>
+<dt><strong>Matrix</strong><span class="classifier">(3, 3)</span></dt><dd><p>2D matrix with 3 dimensions.</p>
 </dd>
 </dl>
 </dd>
@@ -489,8 +489,30 @@ will return a sp.Matrix.</p>
 <span id="solids-compatibility-module"></span><h2>solids.compatibility module<a class="headerlink" href="#module-solids.compatibility" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="solids.compatibility.equilibrium">
-<code class="sig-prename descclassname">solids.compatibility.</code><code class="sig-name descname">equilibrium</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">f</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>list<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>bool<span class="p">]</span><a class="headerlink" href="#solids.compatibility.equilibrium" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">solids.compatibility.</code><code class="sig-name descname">equilibrium</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">f</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>bool<span class="p">]</span><a class="headerlink" href="#solids.compatibility.equilibrium" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test a state of stress for equilibrium conditions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sigma</strong><span class="classifier">sp.Matrix</span></dt><dd><p>Stress matrix</p>
+</dd>
+<dt><strong>f</strong><span class="classifier">list</span></dt><dd><p>List of body forces</p>
+</dd>
+<dt><strong>v</strong><span class="classifier">list</span></dt><dd><p>List of variables, i.e., <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(z\)</span>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[sp.Matrix, bool]</dt><dd><p>A matrix containing each component of the three equilibrium equations. Equilibrium is ddetermine by summing the
+rows of this matrix. If all the sums equal zero, True is returned. False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Page 30, equation 2.45</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="solids.compatibility.from_stress">
@@ -550,6 +572,11 @@ the solution to the system of linear system of equations.</p>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not set <code class="docutils literal notranslate"><span class="pre">full=True</span></code> if converting Jupyter notebook to PDF. A LaTeX error will prevent you from completing this action. Instead, set <code class="docutils literal notranslate"><span class="pre">full=False</span></code>.</p>
+</div>
 </dd></dl>
 
 </div>

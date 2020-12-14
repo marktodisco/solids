@@ -3,8 +3,8 @@ from typing import Union, Tuple
 import sympy as sp
 from sympy.logic.boolalg import BooleanTrue, BooleanFalse
 
-from solids.math import laplacian
 from solids import show
+from solids.math import laplacian
 
 __all__ = [
     'from_stress',
@@ -60,7 +60,30 @@ def from_stress(sigma: sp.Matrix, f: Union[sp.Matrix, list, tuple], v: Union[sp.
     return condition
 
 
-def equilibrium(sigma: sp.Matrix, f: Union[list, sp.Matrix], v: list) -> Tuple[sp.Matrix, bool]:
+def equilibrium(sigma: sp.Matrix, f: list, v: list) -> Tuple[sp.Matrix, bool]:
+    """
+    Test a state of stress for equilibrium conditions.
+
+    Parameters
+    ----------
+    sigma : sp.Matrix
+        Stress matrix
+    f : list
+        List of body forces
+    v : list
+        List of variables, i.e., :math:`x`, :math:`y`, :math:`z`.
+
+    Returns
+    -------
+    Tuple[sp.Matrix, bool]
+        A matrix containing each component of the three equilibrium equations. Equilibrium is ddetermine by summing the
+        rows of this matrix. If all the sums equal zero, True is returned. False otherwise.
+
+    Notes
+    -----
+    Page 30, equation 2.45
+
+    """
     conditions = sp.zeros(len(f), 1)
     satisfied = False
 
@@ -100,6 +123,11 @@ def st_venant_compatibility(symbols: list, strain_field: dict, full=False) -> li
     list
         Simplified compatibility equations. Use Sympy's `solve` to calculate
         the solution to the system of linear system of equations.
+
+    Notes
+    -----
+    .. warning:: Do not set ``full=True`` if converting Jupyter notebook to PDF. A LaTeX error will prevent you from completing this action. Instead, set ``full=False``.
+
     """
     x1, x2, x3 = symbols
 
@@ -172,38 +200,3 @@ def _print_conds(conds):
     msg += r"\end{alignat*}"
 
     show(msg)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
