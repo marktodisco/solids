@@ -75,6 +75,26 @@ def rotation_matrix(theta: int, unit: str = 'rad', numpy: bool = False):
 
 
 def matrix_round(mat: sp.Matrix, precision=0):
+    """
+    Round the elements of a SymPy matrix to a desired precision.
+
+    Parameters
+    ----------
+    mat : Matrix
+        Matrix to round.
+    precision : float
+        Number of decimal places to round to.
+
+    Returns
+    -------
+    Matrix
+        Rounded `mat` to `precision` decimal places.
+
+    Notes
+    -----
+    .. warning:: Deprecated. Use the bound method `n` of `sp.Matrix`.
+    """
+
     mat_copy = mat.copy()
     n, m = mat_copy.shape
     for i in range(n):
@@ -84,6 +104,20 @@ def matrix_round(mat: sp.Matrix, precision=0):
 
 
 def save_latex(expr, filename):
+    """
+    Save LaTeX representation of a SymPy expression to file.
+
+    Parameters
+    ----------
+    expr : Any
+        SymPy expression to save.
+    filename : str
+        Path to file.
+
+    Returns
+    -------
+
+    """
     with open(filename, 'w') as fp:
         fp.write(sp.latex(expr))
 
@@ -113,38 +147,78 @@ def to_numpy(x: sp.Matrix, diag: bool = False, dtype='float64'):
     return np.asarray(x, dtype=dtype)
 
 
-def symmetric(sig: list) -> sp.Matrix:
+def symmetric(x: list) -> sp.Matrix:
+    """
+    Construct a symmetric 2D matrix from a list of values.
+
+    Parameters
+    ----------
+    x : list
+        List of 6 values.
+
+    Returns
+    -------
+    Matrix
+        Symmetric matrix constructed from `x`.
+
+    Raises
+    ------
+    ValueError
+        Length of `x` does not equal 6.
+
+    """
+    if len(x) != 6:
+        raise ValueError
+
     t = sp.zeros(3, 3)
 
-    t[0, 0] = sig[0]
-    t[0, 1] = sig[1]
-    t[0, 2] = sig[2]
+    t[0, 0] = x[0]
+    t[0, 1] = x[1]
+    t[0, 2] = x[2]
     t[1, 0] = t[0, 1]
-    t[1, 1] = sig[3]
-    t[1, 2] = sig[4]
+    t[1, 1] = x[3]
+    t[1, 2] = x[4]
     t[2, 0] = t[0, 2]
     t[2, 1] = t[1, 2]
-    t[2, 2] = sig[5]
+    t[2, 2] = x[5]
 
     return t
 
 
-def mean_deviator(eps: sp.Matrix) -> Tuple:
-    sympy = True if isinstance(eps, sp.Matrix) else False
-    numpy = True if isinstance(eps, np.ndarray) else False
+def mean_deviator(matrix: sp.Matrix) -> Tuple:
+    """
+
+    Parameters
+    ----------
+    matrix : Matrix
+        Matrix from which to calculate the mean deviator.
+
+    Returns
+    -------
+    (array, array) if `matrix` is a NumPy array.
+    (Matrix, Matrix) if `matrix` is a SymPy matrix.
+
+    Raises
+    ------
+    ValueError
+        `matrix` must be either a NumPy array or SymPy matrix.
+
+    """
+    sympy = True if isinstance(matrix, sp.Matrix) else False
+    numpy = True if isinstance(matrix, np.ndarray) else False
     if not (sympy ^ numpy):
         raise ValueError('`eps` must be a sympy Matrix or Numpy array.')
 
     def eval_sympy():
-        e0 = eps.trace() / 3
+        e0 = matrix.trace() / 3
         mean_strain = sp.diag(*[e0] * 3)
-        devaiatoric_strain = eps - mean_strain
+        devaiatoric_strain = matrix - mean_strain
         return mean_strain, devaiatoric_strain
 
     def eval_numpy():
-        e0 = np.trace(eps) / 3
+        e0 = np.trace(matrix) / 3
         mean_strain = np.diag([e0] * 3)
-        deviatoric_strain = eps - mean_strain
+        deviatoric_strain = matrix - mean_strain
         return mean_strain, deviatoric_strain
 
     if numpy:
@@ -152,9 +226,26 @@ def mean_deviator(eps: sp.Matrix) -> Tuple:
     return eval_sympy()
 
 
-def elasticity_matrix(lame: sp.Integer = None,
-                      G: sp.Integer = None
-                      ) -> Tuple[sp.Matrix, sp.Symbol, sp.Symbol]:
+def elasticity_matrix(lame: sp.Integer = None, G: sp.Integer = None) -> Tuple[sp.Matrix, sp.Symbol, sp.Symbol]:
+    """
+    Compute the elasticity matrix :math:`C_{ij}`.
+
+    Parameters
+    ----------
+    lame : Union[Integer, Float]
+        Lame constant. Often called :math:`\lambda` in the literature.
+    G : Union[Integer, Float]
+        Shear modulus of elasticity.
+
+    Returns
+    -------
+    Tuple[Matrix, Symbol, Symbol]
+        Elasticity matrix, Lame constant symbol, and shear modulus of elasticity symbol.
+
+    Notes
+    -----
+    .. math::
+    """
     # Create symbols
     lame_constant_, G_ = sp.symbols('lambda, G')
 
@@ -174,7 +265,25 @@ def elasticity_matrix(lame: sp.Integer = None,
     return C, lame_constant_, G_
 
 
-def compatibility_matrix(E=None, G=None, nu=None):
+def compatibility_matrix(E=None, G=None, nu=None) -> Tuple[sp.Matrix, sp.Symbol, sp.Symbol, sp.Symbol]:
+    """
+    Compute the compatibility matrix.
+
+    Parameters
+    ----------
+    G : Union[Integer, Float]
+        Shear modulus of elasticity.
+    E : Union[Integer, Float]
+        Modulus of elasticity.
+    nu : Union[Integer, Float]
+        Poisson's ratio.
+
+    Returns
+    -------
+    Tuple[Matrix, Symbol, Symbol, Symbol]
+        Compatibility matrix, E symbol, G symbol, nu symbol.
+
+    """
     E_, G_, nu_ = sp.symbols('E, G, nu')
 
     D = sp.zeros(6, 6)
@@ -197,6 +306,24 @@ def compatibility_matrix(E=None, G=None, nu=None):
 
 
 def get_missing(E=None, G=None, nu=None):
+    """
+    Calculate the third material property, if two are known.
+
+    Parameters
+    ----------
+    E :
+        Young's modulus
+    G :
+        Shear modulus
+    nu
+        Poisson's ratio
+
+    Returns
+    -------
+    Tuple[Symbol, Symbol, Symbol]
+        E, G, nu.
+
+    """
     E_, G_, nu_ = sp.symbols('E, G, nu')
     symbol_map = {E_: E, G_: G, nu_: nu}
     missing_map = {E_: True, G_: True, nu_: True}
@@ -230,6 +357,22 @@ def get_missing(E=None, G=None, nu=None):
 
 
 def lame_constant(E, nu):
+    """
+    Calculate the Lame constant :math:`\lambda`.
+
+    Parameters
+    ----------
+    E : Union[Integer, Float]
+        Elastic modulus
+    nu : Union[Integer, Float]
+        Poission's ratio
+
+    Returns
+    -------
+    Union[Integer, Float]
+        Lame constant :math:`\lambda`.
+
+    """
     return nu * E / (1 + nu) / (1 - 2*nu)
 
 
@@ -248,7 +391,7 @@ def voigt_to_matrix(voight: Union[sp.Matrix, list]) -> sp.Matrix:
 
     Returns
     -------
-    (3, 3) sp.matrix
+    Matrix : (3, 3)
         2D matrix with 3 dimensions.
 
     """
@@ -323,32 +466,3 @@ def poissons_ratio(E: Union[sp.Integer, sp.Float, int, float],
     if G <= 0:
         raise ValueError("`G` must be > 0.")
     return E / G / 2 - 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
