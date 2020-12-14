@@ -11,7 +11,6 @@ __all__ = [
     'matrix_round',
     'save_latex',
     'to_numpy',
-    'char_poly',
     'symmetric',
     'mean_deviator',
     'elasticity_matrix',
@@ -112,14 +111,6 @@ def to_numpy(x: sp.Matrix, diag: bool = False, dtype='float64'):
     if (1 in x.shape or len(x.shape) == 1) and diag:
         return np.diagflat(np.asarray(x, dtype=dtype))
     return np.asarray(x, dtype=dtype)
-
-
-def char_poly(sig: sp.Matrix) -> Tuple[sp.Eq, sp.Symbol]:
-    _lambda = sp.symbols('lambda')
-    size = min(sig.shape)
-    A = sig - sp.diag(*[_lambda] * size)
-    d = sp.Eq(A.det(), 0)
-    return d, _lambda
 
 
 def symmetric(sig: list) -> sp.Matrix:

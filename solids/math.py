@@ -1,5 +1,5 @@
 from collections import deque
-from typing import List, Union, Any
+from typing import List, Union, Any, Tuple
 
 import sympy as sp
 
@@ -12,6 +12,7 @@ __all__ = [
     'laplacian',
     'laplacian_matrix',
     'even_odd_test',
+    'char_poly',
     'permutation'
 ]
 
@@ -169,3 +170,11 @@ def laplacian_matrix(matrix: sp.Matrix, symbols: List[sp.Symbol]) -> sp.Matrix:
             L_matrix[i, j] = laplacian(matrix[i, j], symbols)
 
     return L_matrix
+
+
+def char_poly(sig: sp.Matrix) -> Tuple[sp.Eq, sp.Symbol]:
+    _lambda = sp.symbols('lambda')
+    size = min(sig.shape)
+    A = sig - sp.diag(*[_lambda] * size)
+    d = sp.Eq(A.det(), 0)
+    return d, _lambda

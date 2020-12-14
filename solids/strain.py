@@ -8,13 +8,13 @@ from solids.math import jacobian
 from solids.stress import StressState, octahedral_normal, principal_stresses
 
 __all__ = [
-    'strain',
+    'calc_strain',
     'StrainState'
 ]
 
 
-def strain(u: list = None, v: list = None, H: sp.Matrix = None, ret_H: bool = False
-           ) -> Union[Tuple[sp.Matrix, sp.Matrix, sp.Matrix, sp.Matrix],
+def calc_strain(u: list = None, v: list = None, H: sp.Matrix = None, ret_H: bool = False
+                ) -> Union[Tuple[sp.Matrix, sp.Matrix, sp.Matrix, sp.Matrix],
                       Tuple[sp.Matrix, sp.Matrix, sp.Matrix, sp.Matrix, sp.Matrix]]:
     """
     Calculate infinitesimal strain, infinitesimal rotation, Lagrangian strain, and
