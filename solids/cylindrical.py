@@ -63,6 +63,18 @@ class ThickWalledCylinder:
     Po : Union[Integer, Float]
         External pressure
 
+    Attributes
+    ----------
+    u_t
+    u_r
+    eps_rr
+    eps_tt
+    eps_zz
+    sig_rr
+    sig_tt
+    sig_tot
+    sig_zz
+
     """
     def __init__(self,
                  axial_symmetric=False,
@@ -141,41 +153,19 @@ class ThickWalledCylinder:
         if display:
             self.display_funcs()
 
-    @property
-    def u_r(self):
-        return self._funcs['u_r']
-
-    @property
-    def u_t(self):
-        return self._funcs['u_t']
-
-    @property
-    def eps_rr(self):
-        return self._funcs['eps_rr']
-
-    @property
-    def eps_tt(self):
-        return self._funcs['eps_tt']
-
-    @property
-    def eps_zz(self):
-        return self._funcs['eps_zz']
-
-    @property
-    def sig_rr(self):
-        return self._funcs['sig_rr']
-
-    @property
-    def sig_tt(self):
-        return self._funcs['sig_tt']
-
-    @property
-    def sig_zz(self):
-        return self._funcs['sig_zz']
+        self.u_t = u_t
+        self.u_r = u_r
+        self.eps_rr = eps_rr
+        self.eps_tt = eps_tt
+        self.eps_zz = eps_zz
+        self.sig_rr = sig_rr
+        self.sig_tt = sig_tt
+        self.sig_tot = sig_tot
+        self.sig_zz = sig_zz
 
     def display_funcs(self):
         """
-        Display all functions in Jupyter notebook. bababooey
+        Display all functions in Jupyter notebook.
 
         """
         show(self._funcs['u_r'], r'u_{r}=')
@@ -187,3 +177,15 @@ class ThickWalledCylinder:
         show(self._funcs['sig_tt'], r'\sigma_{\theta\theta}=')
         show(self._funcs['sig_tot'], r'\sigma_{tot}=')
         show(self._funcs['sig_zz'], r'\sigma_{zz}=')
+
+    def subs(self, mapping: dict, inplace=False):
+        funcs = self._funcs if inplace else self._funcs.copy()
+
+        for name, function in funcs.items():
+            funcs[name] = funcs[name].subs(mapping)
+
+            if inplace:
+                setattr(self, name, funcs[name])
+
+        if not inplace:
+            return funcs
