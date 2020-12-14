@@ -3,7 +3,7 @@ from typing import Any
 
 import sympy as sp
 
-from solids import StrainState
+from solids.strain import StrainState
 
 
 def compute_difference(a: Any, b: Any) -> Any:

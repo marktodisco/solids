@@ -3,8 +3,9 @@ from typing import Tuple, Union
 
 import sympy as sp
 
-from solids.base import jacobian, show
-from solids.stress import StressState, octahedral_shear, octahedral_normal, principal_stresses, max_shear
+from solids.base import show
+from solids.math import jacobian
+from solids.stress import StressState, octahedral_normal, principal_stresses
 
 __all__ = [
     'strain',

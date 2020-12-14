@@ -7,7 +7,8 @@ setup(
     install_requires=[
         'sympy',
         'numpy',
-        'matplotlib'
+        'matplotlib',
+        'IPython'
     ],
     python_requires='>=3.7, <3.8'
 )

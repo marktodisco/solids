@@ -3,7 +3,8 @@ from typing import Union, Tuple
 import sympy as sp
 from sympy.logic.boolalg import BooleanTrue, BooleanFalse
 
-from solids import laplacian, show
+from solids.math import laplacian
+from solids import show
 
 __all__ = [
     'from_stress',
