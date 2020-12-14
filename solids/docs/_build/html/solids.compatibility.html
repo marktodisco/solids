@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>solids.compatibility package &mdash; solids  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> solids
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">solids</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">solids</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>solids.compatibility package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/solids.compatibility.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="solids-compatibility-package">
+<h1>solids.compatibility package<a class="headerlink" href="#solids-compatibility-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-solids.compatibility">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-solids.compatibility" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="solids.compatibility.equilibrium">
+<code class="sig-prename descclassname">solids.compatibility.</code><code class="sig-name descname">equilibrium</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">f</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>list<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>bool<span class="p">]</span><a class="headerlink" href="#solids.compatibility.equilibrium" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.compatibility.from_stress">
+<code class="sig-prename descclassname">solids.compatibility.</code><code class="sig-name descname">from_stress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">f</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>list<span class="p">, </span>tuple<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>list<span class="p">, </span>tuple<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.compatibility.from_stress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the compatibility conditions of a state of stress for body forces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sigma</strong><span class="classifier">sp.Matrix</span></dt><dd><p>Stress matrix.</p>
+</dd>
+<dt><strong>f</strong><span class="classifier">Union[sp.Matrix, list, tuple]</span></dt><dd><p>Body forces.</p>
+</dd>
+<dt><strong>v: Union[sp.Matrix, list, tuple]</strong></dt><dd><p>Differentiation variables of which <cite>f</cite> and <cite>sigma</cite> are functions.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>sp.Matrix[sp.Eq]</dt><dd><p>Compatibility equations  Sympy equations in the form of a 2D (3 x 3) matrix.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>[1] Introduction to Linear Elasticity 3rd Edition. pg. 102. Equation 5.16.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.compatibility.st_venant_compatibility">
+<code class="sig-prename descclassname">solids.compatibility.</code><code class="sig-name descname">st_venant_compatibility</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">symbols</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">strain_field</span><span class="p">:</span> <span class="n">dict</span></em>, <em class="sig-param"><span class="n">full</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#solids.compatibility.st_venant_compatibility" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the St. Venant compatibility equations for a state of strain_field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>symbols</strong><span class="classifier">list</span></dt><dd><p>Sympy symbols by which <cite>strain_field</cite> are defined.</p>
+</dd>
+<dt><strong>strain_field</strong><span class="classifier">Union[dict, sp.Matrix]</span></dt><dd><dl class="simple">
+<dt>If dict:</dt><dd><p>Mapping of strain_field to state-equations.
+Keys must be {11, 22, 33, 12, 23, 13}.
+Diagonal symmetry is assumed.
+i.e. (12 = 21), (23 = 32), and (13 = 31).</p>
+</dd>
+<dt>If sp.Matrix:</dt><dd><p>Full-form 3 x 3 strain matrix must be supplied.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>full</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, shows latex representation of the compatibility equations.
+The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>list</dt><dd><p>Simplified compatibility equations. Use Sympy’s <cite>solve</cite> to calculate
+the solution to the system of linear system of equations.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Mark Todisco
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

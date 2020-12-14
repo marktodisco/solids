@@ -88,6 +88,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-solids.base">solids.base module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-solids.compatibility">solids.compatibility module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-solids.math">solids.math module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-solids.strain">solids.strain module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-solids.stress">solids.stress module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-solids">Module contents</a></li>
@@ -170,18 +171,8 @@
 <div class="section" id="module-solids.base">
 <span id="solids-base-module"></span><h2>solids.base module<a class="headerlink" href="#module-solids.base" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="solids.base.char_poly">
-<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">char_poly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sig</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.core.relational.Equality<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">]</span><a class="headerlink" href="#solids.base.char_poly" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
 <dt id="solids.base.compatibility_matrix">
 <code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">compatibility_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">E</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">G</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nu</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.compatibility_matrix" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt id="solids.base.cross">
-<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">cross</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.cross" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -195,61 +186,9 @@
 <dd></dd></dl>
 
 <dl class="py function">
-<dt id="solids.base.jacobian">
-<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">u</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">List<span class="p">[</span>sympy.core.symbol.Symbol<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.base.jacobian" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
 <dt id="solids.base.lame_constant">
 <code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">lame_constant</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">E</span></em>, <em class="sig-param"><span class="n">nu</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.lame_constant" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-<dl class="py function">
-<dt id="solids.base.laplacian">
-<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">laplacian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expression</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.core.add.Add<span class="p">, </span>sympy.core.mul.Mul<span class="p">, </span>sympy.core.power.Pow<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">symbols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>sympy.core.symbol.Symbol<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#solids.base.laplacian" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the Laplacian of a scalar value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>expression</strong><span class="classifier">Union[sp.Add, sp.Mul, sp.Pow]</span></dt><dd><p>Symbolic Sympy expression.</p>
-</dd>
-<dt><strong>symbols</strong><span class="classifier">List[sp.Symbol]</span></dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>Any</dt><dd><p>Symbolic Sympy expression.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<p>[1] <a class="reference external" href="https://www.mathworks.com/help/symbolic/laplacian.html">https://www.mathworks.com/help/symbolic/laplacian.html</a></p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="solids.base.laplacian_matrix">
-<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">laplacian_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">symbols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>sympy.core.symbol.Symbol<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.base.laplacian_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the element-wise scalar Laplacian of a 2-dimensional matrix.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>matrix</strong><span class="classifier">sp.Matrix</span></dt><dd><p>2-dimensional matrix.</p>
-</dd>
-<dt><strong>symbols</strong><span class="classifier">List[sp.Symbol]</span></dt><dd><p>Variables of which to compute the Laplacian with respect.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>sp.Matrix</dt><dd><p>The element-wise scalar Laplacian.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<p>[1] <a class="reference external" href="https://www.mathworks.com/help/symbolic/laplacian.html">https://www.mathworks.com/help/symbolic/laplacian.html</a></p>
-</dd></dl>
 
 <dl class="py function">
 <dt id="solids.base.matrix_round">
@@ -299,28 +238,6 @@
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
 <dt>Union[sp.Integer, sp.Float, int, float]</dt><dd><p>Poisson’s ratio.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="solids.base.ref">
-<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">ref</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">display</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.base.ref" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transform the matrix S to row echelon form.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>S</strong><span class="classifier">Matrix</span></dt><dd><p>Matrix to transform.</p>
-</dd>
-<dt><strong>display</strong><span class="classifier">bool, optional</span></dt><dd><p>Display the results in Jupyter notebook. The default True.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>Matrix</dt><dd><p>[description]</p>
 </dd>
 </dl>
 </dd>
@@ -479,6 +396,103 @@ The default is False.</p>
 <dd class="field-even"><dl class="simple">
 <dt>list</dt><dd><p>Simplified compatibility equations. Use Sympy’s <cite>solve</cite> to calculate
 the solution to the system of linear system of equations.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-solids.math">
+<span id="solids-math-module"></span><h2>solids.math module<a class="headerlink" href="#module-solids.math" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="solids.math.char_poly">
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">char_poly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sig</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.core.relational.Equality<span class="p">, </span>sympy.core.symbol.Symbol<span class="p">]</span><a class="headerlink" href="#solids.math.char_poly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.math.cross">
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">cross</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.math.cross" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.math.even_odd_test">
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">even_odd_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">test</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.math.even_odd_test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.math.jacobian">
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">u</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">List<span class="p">[</span>sympy.core.symbol.Symbol<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.math.jacobian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.math.laplacian">
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">laplacian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expression</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>sympy.core.add.Add<span class="p">, </span>sympy.core.mul.Mul<span class="p">, </span>sympy.core.power.Pow<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">symbols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>sympy.core.symbol.Symbol<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#solids.math.laplacian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Laplacian of a scalar value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>expression</strong><span class="classifier">Union[sp.Add, sp.Mul, sp.Pow]</span></dt><dd><p>Symbolic Sympy expression.</p>
+</dd>
+<dt><strong>symbols</strong><span class="classifier">List[sp.Symbol]</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Any</dt><dd><p>Symbolic Sympy expression.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>[1] <a class="reference external" href="https://www.mathworks.com/help/symbolic/laplacian.html">https://www.mathworks.com/help/symbolic/laplacian.html</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.math.laplacian_matrix">
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">laplacian_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">symbols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>sympy.core.symbol.Symbol<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.math.laplacian_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the element-wise scalar Laplacian of a 2-dimensional matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>matrix</strong><span class="classifier">sp.Matrix</span></dt><dd><p>2-dimensional matrix.</p>
+</dd>
+<dt><strong>symbols</strong><span class="classifier">List[sp.Symbol]</span></dt><dd><p>Variables of which to compute the Laplacian with respect.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>sp.Matrix</dt><dd><p>The element-wise scalar Laplacian.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>[1] <a class="reference external" href="https://www.mathworks.com/help/symbolic/laplacian.html">https://www.mathworks.com/help/symbolic/laplacian.html</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.math.permutation">
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">permutation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.math.permutation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="solids.math.ref">
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">ref</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em>, <em class="sig-param"><span class="n">display</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; sympy.matrices.dense.MutableDenseMatrix<a class="headerlink" href="#solids.math.ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the matrix S to row echelon form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>S</strong><span class="classifier">Matrix</span></dt><dd><p>Matrix to transform.</p>
+</dd>
+<dt><strong>display</strong><span class="classifier">bool, optional</span></dt><dd><p>Display the results in Jupyter notebook. The default True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Matrix</dt><dd><p>[description]</p>
 </dd>
 </dl>
 </dd>

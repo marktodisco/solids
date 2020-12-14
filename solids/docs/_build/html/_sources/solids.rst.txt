@@ -20,6 +20,14 @@ solids.compatibility module
    :undoc-members:
    :show-inheritance:
 
+solids.math module
+------------------
+
+.. automodule:: solids.math
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 solids.strain module
 --------------------
 
