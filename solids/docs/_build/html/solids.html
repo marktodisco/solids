@@ -321,7 +321,7 @@
 
 <dl class="py function">
 <dt id="solids.base.mean_deviator">
-<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">mean_deviator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span> &#x2192; Tuple<a class="headerlink" href="#solids.base.mean_deviator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">mean_deviator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>sympy.matrices.dense.MutableDenseMatrix<span class="p">, </span>sympy.matrices.dense.MutableDenseMatrix<span class="p">]</span><a class="headerlink" href="#solids.base.mean_deviator" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -368,12 +368,14 @@
 
 <dl class="py function">
 <dt id="solids.base.rotation_matrix">
-<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">rotation_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">theta</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">unit</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'rad'</span></em>, <em class="sig-param"><span class="n">numpy</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">solids.base.</code><code class="sig-name descname">rotation_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">theta</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">'z'</span></em>, <em class="sig-param"><span class="n">unit</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'rad'</span></em>, <em class="sig-param"><span class="n">numpy</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.base.rotation_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a z-axis rotation matrix given an angle.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>theta</strong><span class="classifier">int</span></dt><dd><p>Rotation about the z-axis</p>
+</dd>
+<dt><strong>axis</strong><span class="classifier">{‘x’, ‘y’, ‘z’}</span></dt><dd><p>Axis of rotation</p>
 </dd>
 <dt><strong>unit</strong><span class="classifier">{‘rad’, ‘deg’}, optional</span></dt><dd><p>Radians or degrees. By default ‘rad’.</p>
 </dd>
@@ -817,6 +819,27 @@ the solution to the system of linear system of equations.</p>
 </dl>
 <p class="rubric">References</p>
 <p>[1] <a class="reference external" href="https://www.mathworks.com/help/symbolic/laplacian.html">https://www.mathworks.com/help/symbolic/laplacian.html</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="solids.math.matrix_decomposition">
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">matrix_decomposition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.math.matrix_decomposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decompose a matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>A</strong><span class="classifier">Matrix</span></dt><dd><p>3 x 3 matrix to decompose.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[Matrix, Matrix, Matrix, Matrix]</dt><dd><p>Symmetric, anti-symmetric, hydrostatic, and deviatoric matrix parts.
+A_sym, A_anti, A_hydro, A_deviator</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">

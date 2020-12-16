@@ -288,6 +288,27 @@
 </dd></dl>
 
 <dl class="py function">
+<dt id="solids.math.matrix_decomposition">
+<code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">matrix_decomposition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span><span class="p">:</span> <span class="n">sympy.matrices.dense.MutableDenseMatrix</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solids.math.matrix_decomposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decompose a matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>A</strong><span class="classifier">Matrix</span></dt><dd><p>3 x 3 matrix to decompose.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Tuple[Matrix, Matrix, Matrix, Matrix]</dt><dd><p>Symmetric, anti-symmetric, hydrostatic, and deviatoric matrix parts.
+A_sym, A_anti, A_hydro, A_deviator</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="solids.math.permutation">
 <code class="sig-prename descclassname">solids.math.</code><code class="sig-name descname">permutation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">j</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#solids.math.permutation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the value of the permutation tensor.</p>

@@ -115,68 +115,58 @@ class ThickWalledCylinder:
         nu = sp.Symbol('nu') if nu is None else nu
 
         r, theta = sp.symbols('r, theta')
-        C1 = sp.Integer(0)
-        C2 = (Pi * Ri ** 2 - Po * Ro ** 2) / 2 / (Ro ** 2 - Ri ** 2)
-        C3 = (Ri * Ro) ** 2 * (Po - Pi) / (Ro ** 2 - Ri ** 2)
-        C4, C5, C6 = sp.symbols("C_(4:7)")
-        if axial_symmetric:
-            C4 = C5 = sp.Integer(0)
+        # C1 = sp.Integer(0)
+        # C2 = (Pi * Ri ** 2 - Po * Ro ** 2) / 2 / (Ro ** 2 - Ri ** 2)
+        # C3 = (Ri * Ro) ** 2 * (Po - Pi) / (Ro ** 2 - Ri ** 2)
+        # C4, C5, C6 = sp.symbols("C_(4:7)")
+        # if axial_symmetric:
+        #     C4 = C5 = sp.Integer(0)
+        #
+        # u_t = (4 * C1 * r * theta + C4 * sp.cos(theta) - C5 * sp.sin(theta) + C6 * r) / E
+        # u_r = (C1 * r * ((1 - nu) * (2 * sp.log(r) - 1) - 2 * nu)
+        #        + 2 * C2 * (1 - nu) * r
+        #        - C3 * (1 + nu) / r) / E + C4 * sp.sin(theta) + C5 * sp.cos(theta)
 
-        u_t = (4 * C1 * r * theta + C4 * sp.cos(theta) - C5 * sp.sin(theta) + C6 * r) / E
-        u_r = (C1 * r * ((1 - nu) * (2 * sp.log(r) - 1) - 2 * nu)
-               + 2 * C2 * (1 - nu) * r
-               - C3 * (1 + nu) / r
-               + C4 * sp.sin(theta)
-               + C5 * sp.cos(theta)) / E
-
-        eps_rr = u_r.diff(r)
-        eps_tt = (u_r + u_t.diff(theta)) / r
-        eps_zz = 2 * nu / E * (Po * Ro ** 2 - Pi * Ri ** 2) / (Ro ** 2 - Ri ** 2)
-
-        sig_rr = ((Pi * Ri ** 2 - Po * Ro ** 2) / (Ro ** 2 - Ri ** 2)
-                  + (Ri * Ro) ** 2 * (Po - Pi) / r ** 2 / (Ro ** 2 - Ri ** 2))
-        sig_tt = ((Pi * Ri ** 2 - Po * Ro ** 2) / (Ro ** 2 - Ri ** 2)
-                  - (Ri * Ro) ** 2 * (Po - Pi) / r ** 2 / (Ro ** 2 - Ri ** 2))
+        # sig_rr = ((Pi * Ri ** 2 - Po * Ro ** 2) / (Ro ** 2 - Ri ** 2)
+        #           + (Ri * Ro) ** 2 * (Po - Pi) / r ** 2 / (Ro ** 2 - Ri ** 2))
+        # sig_tt = ((Pi * Ri ** 2 - Po * Ro ** 2) / (Ro ** 2 - Ri ** 2)
+        #           - (Ri * Ro) ** 2 * (Po - Pi) / r ** 2 / (Ro ** 2 - Ri ** 2))
+        sig_rr = -Pi * (1 - (Ro / r) ** 2) / (1 - (Ro / Ri) ** 2) - Po * (1 - (Ri/r)**2) / (1 - (Ri/Ro)**2)
+        sig_tt = -Pi * (1 + (Ro / r) ** 2) / (1 - (Ro / Ri) ** 2) - Po * (1 + (Ri/r)**2) / (1 - (Ri/Ro)**2)
         sig_tot = sig_rr + sig_tt
-        sig_zz = nu * sig_tot
-
         if plane == 'stress':
             sig_zz = sp.Integer(0)
+        else:
+            sig_zz = nu * sig_tot
+
+        eps_rr = 1/E * (sig_rr - nu * (sig_tt + sig_zz))
+        eps_tt = 1/E * (sig_tt - nu * (sig_rr + sig_zz))
         if plane == 'strain':
             eps_zz = sp.Integer(0)
+        else:
+            eps_zz = 1/E * (sig_zz - nu * (sig_rr + sig_tt))
 
-        funcs = {'u_r': u_r, 'u_t': u_t,
-                 'eps_rr': eps_rr, 'eps_tt': eps_tt, 'eps_zz': eps_zz,
+        funcs = {'eps_rr': eps_rr, 'eps_tt': eps_tt, 'eps_zz': eps_zz,
                  'sig_rr': sig_rr, 'sig_tt': sig_tt, 'sig_tot': sig_tot, 'sig_zz': sig_zz}
         self._funcs = {k: v.simplify() for (k, v) in funcs.items()}
 
+        for name, func in self._funcs.items():
+            setattr(self, name, func)
+
         if display:
             self.display_funcs()
-
-        self.u_t = u_t
-        self.u_r = u_r
-        self.eps_rr = eps_rr
-        self.eps_tt = eps_tt
-        self.eps_zz = eps_zz
-        self.sig_rr = sig_rr
-        self.sig_tt = sig_tt
-        self.sig_tot = sig_tot
-        self.sig_zz = sig_zz
 
     def display_funcs(self):
         """
         Display all functions in Jupyter notebook.
 
         """
-        show(self._funcs['u_r'], r'u_{r}=')
-        show(self._funcs['u_t'], r'u_{\theta}=')
-        show(self._funcs['eps_rr'], r'\varepsilon_{rr}=')
-        show(self._funcs['eps_tt'], r'\varepsilon_{\theta\theta}=')
-        show(self._funcs['eps_zz'], r'\varepsilon_{zz}=')
-        show(self._funcs['sig_rr'], r'\sigma_{rr}=')
-        show(self._funcs['sig_tt'], r'\sigma_{\theta\theta}=')
-        show(self._funcs['sig_tot'], r'\sigma_{tot}=')
-        show(self._funcs['sig_zz'], r'\sigma_{zz}=')
+        func_names = ['eps_rr', 'eps_tt', 'eps_zz', 'sig_rr', 'sig_tt', 'sig_tot', 'sig_zz']
+        latex_names = [r'\varepsilon_{rr}=', r'\varepsilon_{\theta\theta}=', r'\varepsilon_{zz}=', r'\sigma_{rr}=',
+                       r'\sigma_{\theta\theta}=', r'\sigma_{tot}=', r'\sigma_{zz}=']
+        assert len(func_names) == len(latex_names)
+        for name, prefix in zip(func_names, latex_names):
+            show(self._funcs[name], prefix)
 
     def subs(self, mapping: dict, inplace=False):
         funcs = self._funcs if inplace else self._funcs.copy()

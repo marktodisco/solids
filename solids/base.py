@@ -45,7 +45,7 @@ def show(expr, prefix: str = None, postfix: str = None) -> None:
     ipy_display(Math(latex_str))
 
 
-def rotation_matrix(theta: int, unit: str = 'rad', numpy: bool = False):
+def rotation_matrix(theta: int, axis='z', unit: str = 'rad', numpy: bool = False):
     """
     Create a z-axis rotation matrix given an angle.
 
@@ -53,6 +53,8 @@ def rotation_matrix(theta: int, unit: str = 'rad', numpy: bool = False):
     ----------
     theta : int
         Rotation about the z-axis
+    axis : {'x', 'y', 'z'}
+        Axis of rotation
     unit : {'rad', 'deg'}, optional
         Radians or degrees. By default 'rad'.
     numpy : bool, optional
@@ -64,13 +66,15 @@ def rotation_matrix(theta: int, unit: str = 'rad', numpy: bool = False):
     {np.array, sp.Matrix}
         If `numpy` is True, will return rotation matrix as np.array. Otherwise,
         will return a sp.Matrix.
-        
+
     """
+    sin = sp.sin
+    cos = sp.cos
+
     if unit == 'deg':
         theta = sp.rad(theta)
-    R = sp.Matrix([[sp.cos(theta), -sp.sin(theta), 0],
-                   [sp.sin(theta), sp.cos(theta), 0],
-                   [0, 0, 1]])
+
+    R = sp.Matrix([[sp.cos(theta), -sp.sin(theta), 0], [sp.sin(theta), sp.cos(theta), 0], [0, 0, 1]])
     return sp.matrix2numpy(R, dtype='float32') if numpy else R
 
 
@@ -185,7 +189,7 @@ def symmetric(x: list) -> sp.Matrix:
     return t
 
 
-def mean_deviator(matrix: sp.Matrix) -> Tuple:
+def mean_deviator(matrix: sp.Matrix) -> Tuple[sp.Matrix, sp.Matrix]:
     """
 
     Parameters
@@ -476,3 +480,4 @@ def poissons_ratio(E: Union[sp.Integer, sp.Float, int, float],
     if G <= 0:
         raise ValueError("`G` must be > 0.")
     return E / G / 2 - 1
+

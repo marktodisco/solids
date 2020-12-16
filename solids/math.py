@@ -3,6 +3,7 @@ from typing import List, Union, Any, Tuple
 
 import sympy as sp
 
+from solids.base import mean_deviator
 from solids.base import show
 
 __all__ = [
@@ -13,7 +14,8 @@ __all__ = [
     'laplacian_matrix',
     'even_odd_test',
     'char_poly',
-    'permutation'
+    'permutation',
+    'matrix_decomposition'
 ]
 
 
@@ -258,3 +260,34 @@ def char_poly(matrix: sp.Matrix) -> Tuple[sp.Eq, sp.Symbol]:
     A = matrix - sp.diag(*[_lambda] * size)
     d = sp.Eq(A.det(), 0)
     return d, _lambda
+
+
+def matrix_decomposition(A: sp.Matrix):
+    """
+    Decompose a matrix
+
+    Parameters
+    ----------
+    A : Matrix
+        3 x 3 matrix to decompose.
+
+    Returns
+    -------
+    Tuple[Matrix, Matrix, Matrix, Matrix]
+        Symmetric, anti-symmetric, hydrostatic, and deviatoric matrix parts.
+        A_sym, A_anti, A_hydro, A_deviator
+
+    """
+    A_sym = sp.zeros(*A.shape)
+    A_anti = sp.zeros(*A.shape)
+
+    for i in range(3):
+        for j in range(3):
+            A_sym[i, j] = (A[i, j] + A[j, i]) / 2
+            A_anti[i, j] = (A[i, j] - A[j, i]) / 2
+
+    A_hydro = A.trace() / 3
+    A_hydro = sp.diag(*[A_hydro]*3)
+    A_deviator = A_sym - A_hydro
+
+    return A_sym, A_anti, A_hydro, A_deviator
