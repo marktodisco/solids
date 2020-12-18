@@ -2,6 +2,7 @@
 
 ## Installation
 
+1. Download package via `git clone` (reccomended) or download ZIP file and uncompress contents.
 1. Navigate to the root folder
     - Windows: `cd .\solids`
     - Linux/Mac: `cd ./solids`
